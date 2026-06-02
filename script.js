@@ -24,14 +24,13 @@ const CONFIG = {
 
     // Caminho das 10 Fotos do Slider Inicial (Formato iPhone)
     fotosSlider: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg",
-        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg", "imag/foto10.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg"
     ],
 
     // Caminho das 10 Fotos da Galeria em Carrossel (Fotos menores abaixo)
     fotosGaleria: [
-        "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg", "imag/foto14.jpg", "imag/foto15.jpg",
-        "imag/foto16.jpg", "imag/foto17.jpg", "imag/foto18.jpg", "imag/foto19.jpg", "imag/foto20.jpg"
+        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg"
+        
     ],
 
     // Banco de Frases para o Jogo da Memória (O sistema escolhe 4 aleatórias a cada carregamento)
