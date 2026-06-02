@@ -3,8 +3,8 @@
 // ==========================================================================
 const CONFIG = {
     // Nomes do Casal
-    nomeEle: "Phelipe",
-    nomeEla: "Vanessa",
+    nomeEle: "João",
+    nomeEla: "Maria",
     
     // Data de início do relacionamento: Ano, Mês (Atenção: Janeiro é 0, Junho é 5, Dezembro é 11), Dia, Hora, Minuto
     dataInicio: new Date(2025, 5, 12, 0, 0, 0), 
