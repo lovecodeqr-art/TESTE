@@ -1,36 +1,36 @@
 // ==========================================================================
-// 🛠️ ÁREA DE CONFIGURAÇÕES DO CASAL (ALTE RE APENAS ESTA SEÇÃO PARA PERSONALIZAR)
+// 🛠️ ÁREA DE CONFIGURAÇÕES DO CASAL (ALTERE APENAS ESTA SEÇÃO PARA PERSONALIZAR)
 // ==========================================================================
 const CONFIG = {
+    // 🎵 APENAS O ID DO VÍDEO DO YOUTUBE (Exemplo: se o link é youtube.com/watch?v=TynFsTZlGDU, o ID é TynFsTZlGDU)
+    idMusicaYouTube: "TynFsTZlGDU",
+
     // Nomes do Casal
-    nomeEle: "João",
-    nomeEla: "Maria",
+    nomeEle: "Phelipe",
+    nomeEla: "Vanessa",
     
     // Data de início do relacionamento: Ano, Mês (Atenção: Janeiro é 0, Junho é 5, Dezembro é 11), Dia, Hora, Minuto
     dataInicio: new Date(2025, 5, 12, 0, 0, 0), 
-    
-    // Link completo do YouTube para a música de fundo
-    // Dica: Certifique-se de manter o "?autoplay=1&loop=1..." para tocar sozinho!
-    linkMusica: "https://www.youtube.com/embed/TynFsTZlGDU?autoplay=1&loop=1&playlist=TynFsTZlGDU",
     
     // Subtítulo romântico que aparece no slider do iPhone
     subtitulo: "Cada segundo ao seu lado vale a eternidade",
     
     // Texto da carta romântica (use <p>Parágrafo</p> para separar os blocos de texto)
     textoCarta: `
-        <p>Maria, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
+        <p>Vanessa, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
         <p>Este espaço é apenas um pedacinho de tudo o que eu sinto por você. Obrigado por ser minha companheira, minha melhor amiga e o amor da minha vida. Eu te amo hoje, amanhã e para sempre! 💕</p>
     `,
 
     // Caminho das 10 Fotos do Slider Inicial (Formato iPhone)
     fotosSlider: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg",
+        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg", "imag/foto10.jpg"
     ],
 
     // Caminho das 10 Fotos da Galeria em Carrossel (Fotos menores abaixo)
     fotosGaleria: [
-        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg"
-        
+        "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg", "imag/foto14.jpg", "imag/foto15.jpg",
+        "imag/foto16.jpg", "imag/foto17.jpg", "imag/foto18.jpg", "imag/foto19.jpg", "imag/foto20.jpg"
     ],
 
     // Banco de Frases para o Jogo da Memória (O sistema escolhe 4 aleatórias a cada carregamento)
@@ -56,27 +56,29 @@ const giftBox = document.querySelector("#giftBox");
 const giftScreen = document.querySelector("#gift-screen");
 const mainContent = document.querySelector("#main-content");
 
-// Aplica as configurações iniciais de texto e mídia no HTML automaticamente
 function aplicarConfiguracoes() {
     document.getElementById("txtNomeEle").innerText = CONFIG.nomeEle;
     document.getElementById("txtNomeEla").innerText = CONFIG.nomeEla;
     document.getElementById("txtSubtitulo").innerText = CONFIG.subtitulo;
-    document.getElementById("videoPlayer").src = CONFIG.linkMusica;
     document.getElementById("boxTextoCarta").innerHTML = CONFIG.textoCarta;
 
     // Monta o Slider Inicial do iPhone dinamicamente
     const sliderContainer = document.getElementById("sliderDinamico");
-    sliderContainer.innerHTML = "";
-    CONFIG.fotosSlider.forEach((foto, index) => {
-        sliderContainer.innerHTML += `<div class="slide fade"><img src="${foto}" alt="Foto ${index + 1}"></div>`;
-    });
+    if(sliderContainer) {
+        sliderContainer.innerHTML = "";
+        CONFIG.fotosSlider.forEach((foto, index) => {
+            sliderContainer.innerHTML += `<div class="slide fade"><img src="${foto}" alt="Foto ${index + 1}"></div>`;
+        });
+    }
 
     // Monta o Carrossel de Fotos dinamicamente
     const carrosselTrack = document.getElementById("carouselTrack");
-    carrosselTrack.innerHTML = "";
-    CONFIG.fotosGaleria.forEach((foto, index) => {
-        carrosselTrack.innerHTML += `<div class="carousel-item"><img src="${foto}" alt="Galeria ${index + 1}"></div>`;
-    });
+    if(carrosselTrack) {
+        carrosselTrack.innerHTML = "";
+        CONFIG.fotosGaleria.forEach((foto, index) => {
+            carrosselTrack.innerHTML += `<div class="carousel-item"><img src="${foto}" alt="Galeria ${index + 1}"></div>`;
+        });
+    }
 }
 
 // Executa a injeção dos dados assim que a página abre
@@ -87,6 +89,10 @@ giftBox.addEventListener("click", abrirPresente);
 function abrirPresente(){
     giftScreen.style.opacity = "0";
     mainContent.style.display = "flex";
+
+    // Injeta e ativa o player de áudio invisível do YouTube usando o ID configurado
+    const linkConstruido = `https://www.youtube.com/embed/${CONFIG.idMusicaYouTube}?autoplay=1&loop=1&playlist=${CONFIG.idMusicaYouTube}`;
+    document.getElementById("audioBackgroundIframe").src = linkConstruido;
 
     startSlideshow();
     updateTimer();
@@ -141,7 +147,7 @@ let carouselTimeout;
 function moveCarousel(direction) {
     const track = document.getElementById("carouselTrack");
     const items = document.querySelectorAll(".carousel-item");
-    if(items.length === 0) return;
+    if(!items || items.length === 0) return;
     
     let itemsPerView = window.innerWidth <= 768 ? 1 : 3;
     let maxIndex = items.length - itemsPerView;
@@ -250,6 +256,7 @@ function unflipCards() {
     }, 1200);
 }
 
+// Limpeza de tabuleiro
 function resetBoard() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
