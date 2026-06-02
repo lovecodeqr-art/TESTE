@@ -1,17 +1,19 @@
 // ==========================================================================
-// 🛠️ ÁREA DE CONFIGURAÇÕES DO CASAL (ALTE RE APENAS ESTA SEÇÃO PARA PERSONALIZAR)
+// 🛠️ ÁREA DE CONFIGURAÇÕES DO CASAL (ALTERE APENAS ESTA SEÇÃO PARA PERSONALIZAR)
 // ==========================================================================
 const CONFIG = {
+    // 🎵 APENAS O ID DO VÍDEO DO YOUTUBE (Exemplo: se o link é youtube.com/watch?v=TynFsTZlGDU, o ID é TynFsTZlGDU)
+    idYouTube: "TynFsTZlGDU",
+    
+    // Nome da música que vai aparecer no painel flutuante
+    nomeMusica: "Nossa Música Favorita 💕",
+
     // Nomes do Casal
     nomeEle: "Phelipe",
     nomeEla: "Vanessa",
     
     // Data de início do relacionamento: Ano, Mês (Atenção: Janeiro é 0, Junho é 5, Dezembro é 11), Dia, Hora, Minuto
     dataInicio: new Date(2025, 5, 12, 0, 0, 0), 
-    
-    // Link completo do YouTube para a música de fundo
-    // Dica: Certifique-se de manter o "?autoplay=1&loop=1..." para tocar sozinho!
-    linkMusica: "https://www.youtube.com/embed/TynFsTZlGDU?autoplay=1&loop=1&playlist=TynFsTZlGDU",
     
     // Subtítulo romântico que aparece no slider do iPhone
     subtitulo: "Cada segundo ao seu lado vale a eternidade",
@@ -57,37 +59,55 @@ const giftBox = document.querySelector("#giftBox");
 const giftScreen = document.querySelector("#gift-screen");
 const mainContent = document.querySelector("#main-content");
 
-// Aplica as configurações iniciais de texto e mídia no HTML automaticamente
 function aplicarConfiguracoes() {
-    document.getElementById("txtNomeEle").innerText = CONFIG.nomeEle;
-    document.getElementById("txtNomeEla").innerText = CONFIG.nomeEla;
-    document.getElementById("txtSubtitulo").innerText = CONFIG.subtitulo;
-    document.getElementById("videoPlayer").src = CONFIG.linkMusica;
-    document.getElementById("boxTextoCarta").innerHTML = CONFIG.textoCarta;
+    if(document.getElementById("txtNomeEle")) document.getElementById("txtNomeEle").innerText = CONFIG.nomeEle;
+    if(document.getElementById("txtNomeEla")) document.getElementById("txtNomeEla").innerText = CONFIG.nomeEla;
+    if(document.getElementById("txtSubtitulo")) document.getElementById("txtSubtitulo").innerText = CONFIG.subtitulo;
+    if(document.getElementById("boxTextoCarta")) document.getElementById("boxTextoCarta").innerHTML = CONFIG.textoCarta;
+    if(document.getElementById("txtNomeMusica")) document.getElementById("txtNomeMusica").innerText = CONFIG.nomeMusica;
 
     // Monta o Slider Inicial do iPhone dinamicamente
     const sliderContainer = document.getElementById("sliderDinamico");
-    sliderContainer.innerHTML = "";
-    CONFIG.fotosSlider.forEach((foto, index) => {
-        sliderContainer.innerHTML += `<div class="slide fade"><img src="${foto}" alt="Foto ${index + 1}"></div>`;
-    });
+    if(sliderContainer) {
+        sliderContainer.innerHTML = "";
+        CONFIG.fotosSlider.forEach((foto, index) => {
+            sliderContainer.innerHTML += `<div class="slide fade"><img src="${foto}" alt="Foto ${index + 1}"></div>`;
+        });
+    }
 
     // Monta o Carrossel de Fotos dinamicamente
     const carrosselTrack = document.getElementById("carouselTrack");
-    carrosselTrack.innerHTML = "";
-    CONFIG.fotosGaleria.forEach((foto, index) => {
-        carrosselTrack.innerHTML += `<div class="carousel-item"><img src="${foto}" alt="Galeria ${index + 1}"></div>`;
-    });
+    if(carrosselTrack) {
+        carrosselTrack.innerHTML = "";
+        CONFIG.fotosGaleria.forEach((foto, index) => {
+            carrosselTrack.innerHTML += `<div class="carousel-item"><img src="${foto}" alt="Galeria ${index + 1}"></div>`;
+        });
+    }
 }
 
 // Executa a injeção dos dados assim que a página abre
 aplicarConfiguracoes();
 
-giftBox.addEventListener("click", abrirPresente);
+if(giftBox) {
+    giftBox.addEventListener("click", abrirPresente);
+}
 
 function abrirPresente(){
     giftScreen.style.opacity = "0";
     mainContent.style.display = "flex";
+
+    // Injeta e ativa o player invisível com base estrita no ID fornecido
+    const linkConstruido = `https://www.youtube.com/embed/${CONFIG.idYouTube}?autoplay=1&loop=1&playlist=${CONFIG.idYouTube}`;
+    const iframeAudio = document.getElementById("audioBackgroundIframe");
+    if(iframeAudio) {
+        iframeAudio.src = linkConstruido;
+    }
+
+    // Exibe o painel de controle flutuante elegantemente
+    const musicControl = document.getElementById("musicPlayerControl");
+    if(musicControl) {
+        musicControl.classList.add("show");
+    }
 
     startSlideshow();
     updateTimer();
@@ -129,10 +149,10 @@ function updateTimer(){
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    document.querySelector("#days").innerText = String(days).padStart(2, '0');
-    document.querySelector("#hours").innerText = String(hours).padStart(2, '0');
-    document.querySelector("#minutes").innerText = String(minutes).padStart(2, '0');
-    document.querySelector("#seconds").innerText = String(seconds).padStart(2, '0');
+    if(document.querySelector("#days")) document.querySelector("#days").innerText = String(days).padStart(2, '0');
+    if(document.querySelector("#hours")) document.querySelector("#hours").innerText = String(hours).padStart(2, '0');
+    if(document.querySelector("#minutes")) document.querySelector("#minutes").innerText = String(minutes).padStart(2, '0');
+    if(document.querySelector("#seconds")) document.querySelector("#seconds").innerText = String(seconds).padStart(2, '0');
 }
 
 // CARROSSEL AUTOMÁTICO
@@ -142,7 +162,7 @@ let carouselTimeout;
 function moveCarousel(direction) {
     const track = document.getElementById("carouselTrack");
     const items = document.querySelectorAll(".carousel-item");
-    if(items.length === 0) return;
+    if(!items || items.length === 0) return;
     
     let itemsPerView = window.innerWidth <= 768 ? 1 : 3;
     let maxIndex = items.length - itemsPerView;
@@ -153,7 +173,9 @@ function moveCarousel(direction) {
     else if (carouselIndex < 0) { carouselIndex = maxIndex; }
 
     let amountToMove = items[0].getBoundingClientRect().width;
-    track.style.transform = `translateX(-${carouselIndex * amountToMove}px)`;
+    if(track) {
+        track.style.transform = `translateX(-${carouselIndex * amountToMove}px)`;
+    }
     
     resetCarouselAutoPlay();
 }
@@ -185,7 +207,7 @@ function initMemoryGame() {
     const grid = document.getElementById("memoryGameGrid");
     if(!grid) return;
     grid.innerHTML = "";
-    document.getElementById("gameWinMessage").style.display = "none";
+    if(document.getElementById("gameWinMessage")) document.getElementById("gameWinMessage").style.display = "none";
     totalMatchesFound = 0;
 
     const frasesSelecionadas = [...CONFIG.poolFrasesJogo]
@@ -237,7 +259,9 @@ function disableCards() {
     
     totalMatchesFound++;
     if(totalMatchesFound === 4) {
-        setTimeout(() => { document.getElementById("gameWinMessage").style.display = "block"; }, 500);
+        setTimeout(() => { 
+            if(document.getElementById("gameWinMessage")) document.getElementById("gameWinMessage").style.display = "block"; 
+        }, 500);
     }
     resetBoard();
 }
