@@ -10,9 +10,10 @@
 
 <body>
 
-    <div class="floating-hearts"></div>
-    <div class="floating-stars"></div>
+    <!-- CONTAINER DOS EFEITOS (GERADOS PELO JS) -->
+    <div id="effects-container"></div>
 
+    <!-- TELA PRESENTE -->
     <section id="gift-screen">
         <div class="gift-container">
             <h2>Você recebeu um presente especial 🎁</h2>
@@ -24,12 +25,15 @@
         </div>
     </section>
 
+    <!-- CONTEÚDO PRINCIPAL -->
     <main id="main-content">
 
+        <!-- SLIDER MOLDURA IPHONE -->
         <section class="iphone-slider-section">
             <div class="iphone-mockup">
                 <div class="iphone-notch"></div>
                 
+                <!-- As fotos do slider entram aqui via JS -->
                 <div class="slideshow-container" id="sliderDinamico"></div>
                 
                 <div class="overlay"></div>
@@ -46,13 +50,7 @@
             </div>
         </section>
 
-        <section class="music-section">
-            <h2>Nossa Música 🎵</h2>
-            <div class="music-player">
-                <iframe id="videoPlayer" src="" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>
-            </div>
-        </section>
-
+        <!-- CONTADOR DE TEMPO -->
         <section class="counter-section">
             <h2>Nosso Tempo Juntos ⏳</h2>
             <div id="timer">
@@ -75,25 +73,30 @@
             </div>
         </section>
 
+        <!-- CARROSSEL DE GALERIA DE FOTOS -->
         <section class="gallery-section">
             <h2>Nossos Momentos 📸</h2>
             <div class="carousel-container">
                 <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">&#10094;</button>
                 <div class="carousel-wrapper">
+                    <!-- As imagens entram aqui via JS -->
                     <div class="carousel-track" id="carouselTrack"></div>
                 </div>
                 <button class="carousel-btn next-btn" onclick="moveCarousel(1)">&#10095;</button>
             </div>
         </section>
 
+        <!-- TEXTO ROMÂNTICO -->
         <section class="romantic-letter-section">
             <div class="letter-container">
                 <div class="letter-icon">💝</div>
                 <h2>Para o Meu Amor</h2>
+                <!-- O texto romântico entra aqui via JS -->
                 <div class="letter-content" id="boxTextoCarta"></div>
             </div>
         </section>
 
+        <!-- JOGO DA MEMÓRIA -->
         <section class="memory-game-section">
             <h2>Jogo da Memória do Nosso Amor 🧩</h2>
             <p class="game-instruction">Encontre os pares de frases que combinam! As frases mudam sempre que você atualiza a página.</p>
@@ -104,6 +107,20 @@
         </section>
 
     </main>
+
+    <!-- PLAYER FLUTUANTE DA MÚSICA (FIXADO NA TELA) -->
+    <div class="floating-music-player" id="musicPlayerControl">
+        <div class="player-icon-box">🎵</div>
+        <div class="player-info">
+            <span class="playing-now">Tocando agora:</span>
+            <span class="music-name" id="txtNomeMusica">Carregando...</span>
+        </div>
+    </div>
+
+    <!-- REPRODUTOR INVISÍVEL DO YOUTUBE (EVITA ANÚNCIOS VISUAIS) -->
+    <div class="youtube-audio-delivery">
+        <iframe id="audioBackgroundIframe" width="0" height="0" src="" frameborder="0" allow="autoplay"></iframe>
+    </div>
 
     <script src="script.js"></script>
 </body>
