@@ -6,8 +6,8 @@ const CONFIG = {
     idMusicaYouTube: "TynFsTZlGDU",
 
     // Nomes do Casal
-    nomeEle: "Phelipe",
-    nomeEla: "Vanessa",
+    nomeEle: "João",
+    nomeEla: "Maria",
     
     // Data de início do relacionamento: Ano, Mês (Atenção: Janeiro é 0, Junho é 5, Dezembro é 11), Dia, Hora, Minuto
     dataInicio: new Date(2025, 5, 12, 0, 0, 0), 
@@ -17,20 +17,18 @@ const CONFIG = {
     
     // Texto da carta romântica (use <p>Parágrafo</p> para separar os blocos de texto)
     textoCarta: `
-        <p>Vanessa, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
+        <p>Maria, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
         <p>Este espaço é apenas um pedacinho de tudo o que eu sinto por você. Obrigado por ser minha companheira, minha melhor amiga e o amor da minha vida. Eu te amo hoje, amanhã e para sempre! 💕</p>
     `,
 
     // Caminho das 10 Fotos do Slider Inicial (Formato iPhone)
     fotosSlider: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg",
-        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg", "imag/foto10.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg"
     ],
 
     // Caminho das 10 Fotos da Galeria em Carrossel (Fotos menores abaixo)
     fotosGaleria: [
-        "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg", "imag/foto14.jpg", "imag/foto15.jpg",
-        "imag/foto16.jpg", "imag/foto17.jpg", "imag/foto18.jpg", "imag/foto19.jpg", "imag/foto20.jpg"
+        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg"
     ],
 
     // Banco de Frases para o Jogo da Memória (O sistema escolhe 4 aleatórias a cada carregamento)
