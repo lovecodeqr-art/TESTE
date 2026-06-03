@@ -3,7 +3,7 @@
 // ==========================================================================
 const CONFIG = {
     // 🎵 ID DO VÍDEO DO YOUTUBE
-    idYouTube: "TynFsTZlGDU",
+    idYouTube: "rMgaguZTBqg",
     
     // Nome da música que vai aparecer no painel flutuante após o clique
     nomeMusica: "Nossa Música Favorita 💕",
@@ -26,12 +26,14 @@ const CONFIG = {
 
     // Caminho das Fotos do Slider Inicial
     fotosSlider: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", 
+        "imag/foto5.jpg", "imag/foto6.jpg", "imag/foto7.jpg"
     ],
 
     // Caminho das Fotos da Galeria em Carrossel
     fotosGaleria: [
-        "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg", "imag/foto14.jpg", "imag/foto15.jpg"
+        "imag/foto8.jpg", "imag/foto9.jpg", "imag/foto10.jpg", "imag/foto11.jpg", "imag/foto12.jpg",
+        "imag/foto13.jpg"
     ],
 
     // 📸 BANCO DE FOTOS PARA O JOGO DA MEMÓRIA
