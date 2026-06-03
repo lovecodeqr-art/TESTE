@@ -9,8 +9,8 @@ const CONFIG = {
     nomeMusica: "Nossa Música Favorita 💕",
 
     // Nomes do Casal
-    nomeEle: "Phelipe",
-    nomeEla: "Vanessa",
+    nomeEle: "João",
+    nomeEla: "Maria",
     
     // Data de início do relacionamento: Ano, Mês (Janeiro é 0, Junho é 5, Dezembro é 11), Dia, Hora, Minuto
     dataInicio: new Date(2025, 5, 12, 0, 0, 0), 
@@ -20,7 +20,7 @@ const CONFIG = {
     
     // Texto da carta romântica
     textoCarta: `
-        <p>Vanessa, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
+        <p>Maria, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
         <p>Este espaço é apenas um pedacinho de tudo o que eu sinto por você. Obrigado por ser minha companheira, minha melhor amiga e o amor da minha vida. Eu te amo hoje, amanhã e para sempre! 💕</p>
     `,
 
@@ -47,7 +47,7 @@ const CONFIG = {
 
     // 🧩 BANCO DE FOTOS PARA O QUEBRA-CABEÇA
     fotosQuebraCabeca: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg"
     ]
 };
 
