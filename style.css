@@ -31,7 +31,7 @@ body{
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 77, 109, 0.2);
     padding: 10px 20px;
@@ -84,54 +84,49 @@ body{
     100% { transform: rotate(360deg); }
 }
 
-/* ESTILIZAÇÃO DAS PÉTALAS E ESTRELAS DINÂMICAS */
-#effects-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 999;
-    overflow: hidden;
+/* PÉTALAS DE ROSAS E ESTRELAS CINTILANTES */
+.floating-hearts,
+.floating-stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    pointer-events:none;
+    z-index:999;
 }
 
-.petal-heart, .twinkle-star {
-    position: absolute;
-    top: -50px;
-    pointer-events: none;
-    user-select: none;
+.floating-hearts::before{
+    content:"❤  ❤  ❤  ❤  ❤  ❤  ❤";
+    position:absolute;
+    width:100%;
+    color:rgba(255, 77, 109, 0.25);
+    font-size:24px;
+    animation: fallPetals 14s linear infinite;
 }
 
-.petal-heart {
-    color: rgba(255, 77, 109, 0.6);
-    animation: fallAnimation 10s linear infinite;
+.floating-stars::before{
+    content:"✦  ✧  ✦  ✧  ✦  ✧";
+    position:absolute;
+    width:100%;
+    color: rgba(255, 255, 255, 0.7);
+    font-size:16px;
+    animation: fallStars 18s linear infinite, twinkle 3s ease-in-out infinite;
 }
 
-.twinkle-star {
-    color: rgba(255, 215, 0, 0.8);
-    animation: fallAnimation 14s linear infinite, starTwinkle 2s ease-in-out infinite;
+@keyframes fallPetals{
+    0%{ transform: translateY(-10%) rotate(0deg); }
+    50%{ transform: translateY(50vh) rotate(180deg) translateX(20px); }
+    100%{ transform: translateY(105vh) rotate(360deg) translateX(-20px); }
 }
 
-@keyframes fallAnimation {
-    0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(105vh) translateX(100px) rotate(360deg);
-        opacity: 0;
-    }
+@keyframes fallStars{
+    0%{ transform: translateY(-10%); }
+    100%{ transform: translateY(105vh); }
 }
 
-@keyframes starTwinkle {
-    0%, 100% { opacity: 0.4; }
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
     50% { opacity: 1; }
 }
 
@@ -364,7 +359,7 @@ body{
     font-size:0.9rem;
 }
 
-/* CARROSSEL DE MINIATURAS (A JUSTADO: MAIS ALTO PARA FOTOS VERTICAIS) */
+/* CARROSSEL DE MINIATURAS */
 .gallery-section {
     padding:60px 20px;
     text-align:center;
@@ -404,14 +399,10 @@ body{
 
 .carousel-item img {
     width:100%;
-    height:360px; /* Aumentado de 250px para 360px para fotos verticais elegantes */
+    height:250px;
     object-fit:cover;
     border-radius:15px;
     transition:transform 0.3s;
-}
-
-.carousel-item img:hover {
-    transform: scale(1.02);
 }
 
 .carousel-btn {
@@ -462,7 +453,7 @@ body{
     text-align:justify;
 }
 
-/* GAME DE MEMÓRIA DE FRASES */
+/* JOGO DA MEMÓRIA COM AJUSTE PREMIUM DE ENQUADRAMENTO */
 .memory-game-section {
     padding:60px 20px 100px 20px;
     text-align:center;
@@ -500,17 +491,27 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:8px;
     box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
 
+/* Frente do card onde a foto do casal aparece */
 .front-face {
-    background:#fff;
-    color:#ff4d6d;
-    transform:rotateY(180deg);
-    font-size:0.85rem;
-    font-weight:600;
+    background:#fffbfb; /* Cor de fundo romântica caso a foto tenha barras laterais */
     border:2px solid #ff8fab;
+    overflow:hidden;
+    padding: 3px; /* Pequeno espaçamento de moldura */
+}
+
+/* Configuração Inteligente da Foto do Casal no Card */
+.front-face img {
+    width: 100%;
+    height: 100%;
+    /* DICA PREMIUM PARA VENDAS: 
+       - 'cover' preenche todo o espaço focando no meio (não deixa espaços vazios).
+       - Se preferir mostrar 100% da foto inteira sem cortar nadinha dos lados, mude para 'contain' abaixo! */
+    object-fit: cover; 
+    object-position: center top; /* Garante o foco nos rostos (geralmente na parte superior/central da imagem) */
+    border-radius: 12px;
 }
 
 .back-face {
@@ -530,7 +531,6 @@ body{
     }
     .modern-title { font-size:2.2rem; }
     .carousel-item { min-width:100%; }
-    .carousel-item img { height: 280px; } /* Ajustado proporcionalmente para celulares */
     .prev-btn { left:5px; }
     .next-btn { right:5px; }
     .memory-game { grid-template-columns:repeat(2,1fr); }
