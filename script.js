@@ -3,7 +3,7 @@
 // ==========================================================================
 const CONFIG = {
     // 🎵 APENAS O ID DO VÍDEO DO YOUTUBE (Exemplo: se o link é youtube.com/watch?v=TynFsTZlGDU, o ID é TynFsTZlGDU)
-    idYouTube: "TynFsTZlGDU",
+    idYouTube: "rMgaguZTBqg",
     
     // Nome da música que vai aparecer no painel flutuante
     nomeMusica: "Nossa Música Favorita 💕",
