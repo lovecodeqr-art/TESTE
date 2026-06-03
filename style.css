@@ -453,7 +453,7 @@ body{
     text-align:justify;
 }
 
-/* JOGO DA MEMÓRIA COM AJUSTE PREMIUM DE ENQUADRAMENTO */
+/* JOGO DA MEMÓRIA COM ENQUADRAMENTO INTELIGENTE */
 .memory-game-section {
     padding:60px 20px 100px 20px;
     text-align:center;
@@ -494,23 +494,19 @@ body{
     box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* Frente do card onde a foto do casal aparece */
 .front-face {
-    background:#fffbfb; /* Cor de fundo romântica caso a foto tenha barras laterais */
+    background:#fffbfb; 
     border:2px solid #ff8fab;
     overflow:hidden;
-    padding: 3px; /* Pequeno espaçamento de moldura */
+    padding: 3px; 
 }
 
-/* Configuração Inteligente da Foto do Casal no Card */
+/* Ajuste Fino para Enquadrar Sem Cortar Rostos */
 .front-face img {
     width: 100%;
     height: 100%;
-    /* DICA PREMIUM PARA VENDAS: 
-       - 'cover' preenche todo o espaço focando no meio (não deixa espaços vazios).
-       - Se preferir mostrar 100% da foto inteira sem cortar nadinha dos lados, mude para 'contain' abaixo! */
     object-fit: cover; 
-    object-position: center top; /* Garante o foco nos rostos (geralmente na parte superior/central da imagem) */
+    object-position: center top; /* Foca nos rostos na parte de cima/centro */
     border-radius: 12px;
 }
 
