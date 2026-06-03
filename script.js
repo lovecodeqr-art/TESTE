@@ -2,52 +2,50 @@
 // 🛠️ ÁREA DE CONFIGURAÇÕES DO CASAL (ALTERE APENAS ESTA SEÇÃO PARA PERSONALIZAR)
 // ==========================================================================
 const CONFIG = {
-    // 🎵 APENAS O ID DO VÍDEO DO YOUTUBE (Exemplo: se o link é youtube.com/watch?v=TynFsTZlGDU, o ID é TynFsTZlGDU)
-    idYouTube: "rMgaguZTBqg",
+    // 🎵 ID DO VÍDEO DO YOUTUBE
+    idYouTube: "TynFsTZlGDU",
     
     // Nome da música que vai aparecer no painel flutuante após o clique
     nomeMusica: "Nossa Música Favorita 💕",
 
     // Nomes do Casal
-    nomeEle: "João",
-    nomeEla: "Maria",
+    nomeEle: "Phelipe",
+    nomeEla: "Vanessa",
     
-    // Data de início do relacionamento: Ano, Mês (Atenção: Janeiro é 0, Junho é 5, Dezembro é 11), Dia, Hora, Minuto
+    // Data de início do relacionamento: Ano, Mês (Janeiro é 0, Junho é 5, Dezembro é 11), Dia, Hora, Minuto
     dataInicio: new Date(2025, 5, 12, 0, 0, 0), 
     
-    // Subtítulo romântico que aparece no slider do iPhone
+    // Subtítulo romântico do slider do iPhone
     subtitulo: "Cada segundo ao seu lado vale a eternidade",
     
-    // Texto da carta romântica (use <p>Parágrafo</p> para separar os blocos de texto)
+    // Texto da carta romântica
     textoCarta: `
-        <p>Maria, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
+        <p>Vanessa, desde o momento em que você entrou na minha vida, tudo ganhou mais cor e mais sentido. Cada risada compartilhada, cada plano para o futuro e cada pequeno detalhe do dia a dia ao seu lado se transformaram nos meus momentos favoritos do mundo.</p>
         <p>Este espaço é apenas um pedacinho de tudo o que eu sinto por você. Obrigado por ser minha companheira, minha melhor amiga e o amor da minha vida. Eu te amo hoje, amanhã e para sempre! 💕</p>
     `,
 
-    // Caminho das Fotos do Slider Inicial (Formato iPhone)
+    // Caminho das Fotos do Slider Inicial
     fotosSlider: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg",
-        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg"
     ],
 
-    // Caminho das Fotos da Galeria em Carrossel (Fotos menores abaixo)
+    // Caminho das Fotos da Galeria em Carrossel
     fotosGaleria: [
-        "imag/foto9.jpg", "imag/foto10.jpg", "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg"
+        "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg", "imag/foto14.jpg", "imag/foto15.jpg"
     ],
 
     // 📸 BANCO DE FOTOS PARA O JOGO DA MEMÓRIA
     fotosJogo: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg",
-        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg", "imag/foto10.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto10.jpg", "imag/foto11.jpg",
+        "imag/foto12.jpg", "imag/foto13.jpg", "imag/foto14.jpg", "imag/foto15.jpg", "imag/foto16.jpg"
     ],
 
-    // 🔍 PALAVRAS PARA O CAÇA-PALAVRAS ROMÂNTICO
-    palavrasCaca: ["AMOR", "SEMPRE", "BEIJO", "DESTINO", "JOAO", "MARIA"],
+    // 🔍 PALAVRAS PARA O CAÇA-PALAVRAS
+    palavrasCaca: ["AMOR", "SEMPRE", "BEIJO", "DESTINO", "PHELIPE", "VANESSA"],
 
-    // 🧩 BANCO DE FOTOS PARA O QUEBRA-CABEÇA (O sistema escolhe uma aleatória por carregamento)
-    // Dica: Use fotos quadradas (proporção 1:1) para o encaixe perfeito das peças!
+    // 🧩 BANCO DE FOTOS PARA O QUEBRA-CABEÇA
     fotosQuebraCabeca: [
-        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg"
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg"
     ]
 };
 
@@ -65,7 +63,7 @@ const playerIcon = document.getElementById("playerIcon");
 let ytPlayer; 
 let isPlaying = false;
 
-// Inicializa o script do YouTube
+// Inicializa a biblioteca do YouTube
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -145,7 +143,8 @@ function abrirPresente(){
     startAutoCarousel();
     initMemoryGame();
     initWordSearch();
-    initPuzzle(); // Inicializa o Quebra-Cabeça
+    initPuzzle();
+    startHeartsGenerator(); // 🔥 Ativa o novo sistema dinâmico de corações flutuantes
 
     setTimeout(function(){
         if(giftScreen) giftScreen.style.display = "none";
@@ -169,7 +168,44 @@ if(musicControl) {
     });
 }
 
-// SLIDESHOW MOLDURA IPHONE
+// 🔥 NOVO SISTEMA DINÂMICO DE GERAÇÃO DE CORAÇÕES (MUITO MAIS FLUIDO)
+function startHeartsGenerator() {
+    const container = document.getElementById("heartsContainer");
+    if (!container) return;
+
+    // Diferentes estilos de corações e estrelas românticas para variar o visual
+    const heartTypes = ["❤", "💖", "💕", "❣", "🌸"];
+
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        
+        // Escolhe um tipo de símbolo aleatoriamente da lista
+        heart.innerText = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+
+        // Gera propriedades físicas totalmente randômicas para cada unidade
+        const startPositionX = Math.random() * 100; // Posição lateral na tela (0% a 100%)
+        const durationFly = Math.random() * 6 + 6;   // Velocidade de subida (6s a 12s)
+        const durationSway = Math.random() * 3 + 2;  // Velocidade do balanço lateral (2s a 5s)
+        const size = Math.random() * 20 + 12;        // Tamanho do coração (12px a 32px)
+
+        // Aplica as propriedades customizadas via CSS Inline
+        heart.style.left = `${startPositionX}%`;
+        heart.style.fontSize = `${sizepx = size}px`;
+        heart.style.animationName = 'flyUp, sway';
+        heart.style.animationDuration = `${durationFly}s, ${durationSway}s`;
+
+        container.appendChild(heart);
+
+        // Remove o elemento do HTML após o término da animação para economizar memória do celular
+        setTimeout(() => {
+            heart.remove();
+        }, durationFly * 1000);
+
+    }, 350); // Cria um novo elemento a cada 350 milissegundos
+}
+
+// SLIDESHOW
 let slideIndex = 0;
 let slideshowTimeout;
 function startSlideshow(){
@@ -183,7 +219,7 @@ function startSlideshow(){
     slideshowTimeout = setTimeout(startSlideshow, 3500);
 }
 
-// CONTADOR DE TEMPO JUNTOS
+// TIMER
 function updateTimer(){
     const now = new Date();
     const difference = now - CONFIG.dataInicio;
@@ -198,7 +234,7 @@ function updateTimer(){
     if(document.querySelector("#seconds")) document.querySelector("#seconds").innerText = String(seconds).padStart(2, '0');
 }
 
-// CARROSSEL AUTOMÁTICO
+// CARROSSEL
 let carouselIndex = 0;
 let carouselTimeout;
 function moveCarousel(direction) {
@@ -217,7 +253,7 @@ function moveCarousel(direction) {
 function startAutoCarousel() { carouselTimeout = setInterval(() => { moveCarousel(1); }, 3000); }
 function resetCarouselAutoPlay() { clearInterval(carouselTimeout); startAutoCarousel(); }
 
-// JOGO DA MEMÓRIA
+// JOGO 1: MEMÓRIA
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
@@ -264,7 +300,7 @@ function unflipCards() {
 }
 function resetBoard() { [hasFlippedCard, lockBoard] = [false, false]; [firstCard, secondCard] = [null, null]; }
 
-// CAÇA-PALAVRAS ROMÂNTICO
+// JOGO 2: CAÇA-PALAVRAS
 const gridSize = 10; 
 let gridMatrix = [];
 let foundWords = [];
@@ -321,7 +357,6 @@ function initWordSearch() {
             cellDiv.innerText = gridMatrix[r][c];
             cellDiv.dataset.row = r;
             cellDiv.dataset.col = c;
-
             cellDiv.addEventListener("mousedown", startWordSelection);
             cellDiv.addEventListener("mouseenter", elementSelectionHover);
             gridContainer.appendChild(cellDiv);
@@ -383,87 +418,77 @@ function endWordSelection() {
     selectedCellsList = [];
 }
 
-// ==========================================================================
-// JOGO 3: QUEBRA-CABEÇA SLIDER ROMÂNTICO (DINÂMICO E RESPONSIVO)
-// ==========================================================================
-let puzzleSize = 3; // Grid de 3x3 (8 peças e 1 espaço vazio)
+// JOGO 3: QUEBRA-CABEÇA SLIDER
+let puzzleSize = 3; 
 let puzzleOrder = [];
 let correctPuzzleOrder = [];
 
 function initPuzzle() {
     const board = document.getElementById("puzzleBoard");
     if (!board) return;
-    board.innerHTML = "";
+    board.innerHTML = "<p style='color:#ff4d6d; padding:20px; font-weight:600;'>Carregando foto...</p>";
     document.getElementById("puzzleWinMessage").style.display = "none";
 
-    // 1. Seleciona uma foto aleatória da configuração
     const fotoAleatoria = CONFIG.fotosQuebraCabeca[Math.floor(Math.random() * CONFIG.fotosQuebraCabeca.length)];
 
-    // 2. Cria as posições corretas e embaralha
-    puzzleOrder = [];
-    correctPuzzleOrder = [];
-    let totalPieces = puzzleSize * puzzleSize;
+    const imgPreload = new Image();
+    imgPreload.src = fotoAleatoria;
+    imgPreload.onload = function() {
+        board.innerHTML = "";
+        puzzleOrder = [];
+        correctPuzzleOrder = [];
+        let totalPieces = puzzleSize * puzzleSize;
 
-    for (let i = 0; i < totalPieces; i++) {
-        correctPuzzleOrder.push(i);
-        puzzleOrder.push(i);
-    }
-
-    // Embaralha de forma válida
-    do {
-        puzzleOrder.sort(() => Math.random() - 0.5);
-    } while (!isPuzzleSolvable() || isPuzzleCorrect());
-
-    // 3. Renderiza as peças usando fatias da imagem via CSS Background
-    puzzleOrder.forEach((pos, index) => {
-        const piece = document.createElement("div");
-        piece.classList.add("puzzle-piece");
-        piece.dataset.index = index;
-
-        if (pos === totalPieces - 1) {
-            piece.classList.add("empty"); // A última peça vira o espaço em branco
-        } else {
-            piece.style.backgroundImage = `url('${fotoAleatoria}')`;
-            
-            // Calcula o fatiamento da imagem em porcentagem
-            let row = Math.floor(pos / puzzleSize);
-            let col = pos % puzzleSize;
-            let percentX = (col / (puzzleSize - 1)) * 100;
-            let percentY = (row / (puzzleSize - 1)) * 100;
-            
-            piece.style.backgroundSize = `${puzzleSize * 100}% ${puzzleSize * 100}%`;
-            piece.style.backgroundPosition = `${percentX}% ${percentY}%`;
-            
-            piece.addEventListener("click", () => movePuzzlePiece(index));
+        for (let i = 0; i < totalPieces; i++) {
+            correctPuzzleOrder.push(i);
+            puzzleOrder.push(i);
         }
-        board.appendChild(piece);
-    });
+
+        do {
+            puzzleOrder.sort(() => Math.random() - 0.5);
+        } while (!isPuzzleSolvable() || isPuzzleCorrect());
+
+        puzzleOrder.forEach((pos, index) => {
+            const piece = document.createElement("div");
+            piece.classList.add("puzzle-piece");
+            piece.dataset.index = index;
+
+            if (pos === totalPieces - 1) {
+                piece.classList.add("empty"); 
+            } else {
+                piece.style.backgroundImage = `url('${fotoAleatoria}')`;
+                let row = Math.floor(pos / puzzleSize);
+                let col = pos % puzzleSize;
+                let percentX = (col / (puzzleSize - 1)) * 100;
+                let percentY = (row / (puzzleSize - 1)) * 100;
+                piece.style.backgroundSize = `${puzzleSize * 100}% ${puzzleSize * 100}%`;
+                piece.style.backgroundPosition = `${percentX}% ${percentY}%`;
+                piece.addEventListener("click", () => movePuzzlePiece(index));
+            }
+            board.appendChild(piece);
+        });
+    };
+    imgPreload.onerror = function() {
+        board.innerHTML = "<p style='color:red; padding:20px;'>Erro ao carregar a foto do quebra-cabeça.</p>";
+    };
 }
 
 function movePuzzlePiece(clickedIndex) {
     let emptyIndex = puzzleOrder.indexOf(puzzleSize * puzzleSize - 1);
-
-    // Valida se a peça clicada é vizinha (cima, baixo, esquerda, direita) do espaço vazio
     let clickedRow = Math.floor(clickedIndex / puzzleSize);
     let clickedCol = clickedIndex % puzzleSize;
     let emptyRow = Math.floor(emptyIndex / puzzleSize);
     let emptyCol = emptyIndex % puzzleSize;
-
     let isNeighbor = (Math.abs(clickedRow - emptyRow) + Math.abs(clickedCol - emptyCol)) === 1;
 
     if (isNeighbor) {
-        // Inverte a posição das peças no array
         let temp = puzzleOrder[clickedIndex];
         puzzleOrder[clickedIndex] = puzzleOrder[emptyIndex];
         puzzleOrder[emptyIndex] = temp;
-
-        // Atualiza a renderização na tela
         initPuzzleRenderFromOrder();
 
-        // Checa vitória
         if (isPuzzleCorrect()) {
             document.getElementById("puzzleWinMessage").style.display = "block";
-            // Mostra a última peça que estava escondida para completar a foto inteira!
             const emptyCell = document.querySelector(".puzzle-piece.empty");
             if (emptyCell) emptyCell.classList.remove("empty");
         }
@@ -474,13 +499,8 @@ function initPuzzleRenderFromOrder() {
     const pieces = document.querySelectorAll(".puzzle-piece");
     const board = document.getElementById("puzzleBoard");
     if (!board) return;
-
-    // Pega a imagem que já estava rodando
     let bgImg = "";
-    for (let p of pieces) {
-        if (p.style.backgroundImage) { bgImg = p.style.backgroundImage; break; }
-    }
-
+    for (let p of pieces) { if (p.style.backgroundImage) { bgImg = p.style.backgroundImage; break; } }
     board.innerHTML = "";
     let totalPieces = puzzleSize * puzzleSize;
 
@@ -488,10 +508,7 @@ function initPuzzleRenderFromOrder() {
         const piece = document.createElement("div");
         piece.classList.add("puzzle-piece");
         piece.dataset.index = index;
-
-        if (pos === totalPieces - 1) {
-            piece.classList.add("empty");
-        } else {
+        if (pos === totalPieces - 1) { piece.classList.add("empty"); } else {
             piece.style.backgroundImage = bgImg;
             let row = Math.floor(pos / puzzleSize);
             let col = pos % puzzleSize;
@@ -504,21 +521,9 @@ function initPuzzleRenderFromOrder() {
         board.appendChild(piece);
     });
 }
-
-function isPuzzleCorrect() {
-    return puzzleOrder.every((val, i) => val === correctPuzzleOrder[i]);
-}
-
-// Garante matematicamente que o jogo gerado tem solução física
+function isPuzzleCorrect() { return puzzleOrder.every((val, i) => val === correctPuzzleOrder[i]); }
 function isPuzzleSolvable() {
-    let inversions = 0;
-    let length = puzzleOrder.length - 1;
-    for (let i = 0; i < length; i++) {
-        for (let j = i + 1; j <= length; j++) {
-            if (puzzleOrder[i] > puzzleOrder[j] && puzzleOrder[i] !== length && puzzleOrder[j] !== length) {
-                inversions++;
-            }
-        }
-    }
+    let inversions = 0; let length = puzzleOrder.length - 1;
+    for (let i = 0; i < length; i++) { for (let j = i + 1; j <= length; j++) { if (puzzleOrder[i] > puzzleOrder[j] && puzzleOrder[i] !== length && puzzleOrder[j] !== length) inversions++; } }
     return inversions % 2 === 0;
 }
