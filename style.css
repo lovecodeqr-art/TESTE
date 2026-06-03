@@ -94,7 +94,7 @@ body{
     100% { transform: rotate(360deg); }
 }
 
-/* PÉTALAS DE ROSAS E ESTRELAS */
+/* PÉTALAS E ESTRELAS */
 .floating-hearts,
 .floating-stars{
     position:fixed;
@@ -158,540 +158,164 @@ body{
     position: relative;
 }
 
-.gift-container h2{
-    font-size:2.2rem;
-    margin-bottom:15px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.gift-container p{
-    font-size:1.1rem;
-    margin-bottom:40px;
-    opacity: 0.9;
-}
-
-.gift-box{
-    width:180px;
-    height:180px;
-    position:relative;
-    cursor:pointer;
-    transition:.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
+.gift-container h2{ font-size:2.2rem; margin-bottom:15px; }
+.gift-container p{ font-size:1.1rem; margin-bottom:40px; }
+.gift-box{ width:180px; height:180px; position:relative; cursor:pointer; transition:.4s; }
 .gift-box:hover{ transform:scale(1.1); }
-
-.gift-body{
-    width:160px;
-    height:130px;
-    background:#ff4d6d;
-    position:absolute;
-    bottom:0;
-    left:10px;
-    border-radius:15px;
-    box-shadow:0 15px 30px rgba(0,0,0,0.15);
-}
-
-.gift-body::before{
-    content:"";
-    position:absolute;
-    width:25px;
-    height:100%;
-    background:white;
-    left:50%;
-    transform:translateX(-50%);
-}
-
-.gift-lid{
-    width:180px;
-    height:40px;
-    background:#ff758f;
-    position:absolute;
-    top:20px;
-    border-radius:15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.gift-lid::before{
-    content:"";
-    position:absolute;
-    width:25px;
-    height:100%;
-    background:white;
-    left:50%;
-    transform:translateX(-50%);
-}
+.gift-body{ width:160px; height:130px; background:#ff4d6d; position:absolute; bottom:0; left:10px; border-radius:15px; }
+.gift-body::before{ content:""; position:absolute; width:25px; height:100%; background:white; left:50%; transform:translateX(-50%); }
+.gift-lid{ width:180px; height:40px; background:#ff758f; position:absolute; top:20px; border-radius:15px; }
+.gift-lid::before{ content:""; position:absolute; width:25px; height:100%; background:white; left:50%; transform:translateX(-50%); }
 
 /* MOLDURA E SLIDER DO IPHONE */
-.iphone-slider-section {
-    width:100%;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px 20px;
-    background: linear-gradient(to bottom, #fff4f6, #ffe5ec);
-}
-
-.iphone-mockup {
-    width:360px;
-    height:740px;
-    background:#000;
-    border:12px solid #222;
-    border-radius:45px;
-    position:relative;
-    box-shadow:0 30px 60px rgba(255, 77, 109, 0.2);
-    overflow:hidden;
-}
-
-.iphone-notch {
-    width:150px;
-    height:25px;
-    background:#222;
-    position:absolute;
-    top:0;
-    left:50%;
-    transform:translateX(-50%);
-    border-bottom-left-radius:15px;
-    border-bottom-right-radius:15px;
-    z-index:10;
-}
-
-.slideshow-container{
-    width:100%;
-    height:100%;
-    position:relative;
-}
-
-.slide{
-    display:none;
-    width:100%;
-    height:100%;
-    position:absolute;
-}
-
-.slide img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:brightness(0.55);
-}
-
-.overlay{
-    width:100%;
-    height:100%;
-    position:absolute;
-    background:linear-gradient(to top,rgba(0,0,0,0.85), transparent 60%);
-    bottom:0;
-}
-
-.main-overlay{
-    position:absolute;
-    bottom:40px;
-    left:50%;
-    transform:translateX(-50%);
-    color:white;
-    text-align:center;
-    z-index:5;
-    width:90%;
-}
-
-.love-tag{
-    background:rgba(255,255,255,0.2);
-    padding:8px 20px;
-    border-radius:50px;
-    backdrop-filter:blur(10px);
-    font-size:0.9rem;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.modern-title{
-    margin-top:15px;
-    font-size:2.8rem;
-    font-weight:300;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-}
-
-.subtitle{
-    margin-top:10px;
-    font-size:1rem;
-    opacity:0.9;
-}
-
-.heart-divider{
-    color:#ff4d6d;
-    animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    50%{ transform:scale(1.2); }
-}
+.iphone-slider-section { width:100%; min-height:100vh; display:flex; justify-content:center; align-items:center; padding:40px 20px; }
+.iphone-mockup { width:360px; height:740px; background:#000; border:12px solid #222; border-radius:45px; position:relative; overflow:hidden; }
+.iphone-notch { width:150px; height:25px; background:#222; position:absolute; top:0; left:50%; transform:translateX(-50%); border-bottom-left-radius:15px; border-bottom-right-radius:15px; z-index:10; }
+.slideshow-container{ width:100%; height:100%; position:relative; }
+.slide{ display:none; width:100%; height:100%; position:absolute; }
+.slide img{ width:100%; height:100%; object-fit:cover; filter:brightness(0.55); }
+.overlay{ width:100%; height:100%; position:absolute; background:linear-gradient(to top,rgba(0,0,0,0.85), transparent 60%); bottom:0; }
+.main-overlay{ position:absolute; bottom:40px; left:50%; transform:translateX(-50%); color:white; text-align:center; z-index:5; width:90%; }
+.love-tag{ background:rgba(255,255,255,0.2); padding:8px 20px; border-radius:50px; backdrop-filter:blur(10px); font-size:0.9rem; }
+.modern-title{ margin-top:15px; font-size:2.8rem; font-weight:300; display:flex; align-items:center; justify-content:center; gap:10px; }
+.subtitle{ margin-top:10px; font-size:1rem; opacity:0.9; }
+.heart-divider{ color:#ff4d6d; animation:pulse 1.5s infinite; }
+@keyframes pulse{ 50%{ transform:scale(1.2); } }
 
 /* CRONÔMETRO */
-.counter-section{
-    padding:60px 20px;
-    text-align:center;
-}
-
-.counter-section h2{
-    color:#ff4d6d;
-    margin-bottom:25px;
-}
-
-#timer{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.time-box{
-    background:white;
-    padding:20px;
-    border-radius:20px;
-    min-width:110px;
-    flex: 1;
-    max-width: 140px;
-    box-shadow:0 10px 25px rgba(255,77,109,0.12);
-}
-
-.time-box span{
-    display:block;
-    font-size:2.2rem;
-    color:#ff4d6d;
-    font-weight:bold;
-}
-
-.time-box label{
-    color:#666;
-    font-size:0.9rem;
-}
+.counter-section{ padding:60px 20px; text-align:center; }
+.counter-section h2{ color:#ff4d6d; margin-bottom:25px; }
+#timer{ display:flex; justify-content:center; gap:15px; flex-wrap:wrap; }
+.time-box{ background:white; padding:20px; border-radius:20px; min-width:110px; flex: 1; max-width: 140px; box-shadow:0 10px 25px rgba(255,77,109,0.12); }
+.time-box span{ display:block; font-size:2.2rem; color:#ff4d6d; font-weight:bold; }
+.time-box label{ color:#666; font-size:0.9rem; }
 
 /* CARROSSEL */
-.gallery-section {
-    padding:60px 20px;
-    text-align:center;
-    width:100%;
-}
-
-.gallery-section h2 {
-    color:#ff4d6d;
-    margin-bottom:25px;
-}
-
-.carousel-container {
-    position:relative;
-    max-width:900px;
-    margin:0 auto;
-    display:flex;
-    align-items:center;
-}
-
-.carousel-wrapper {
-    overflow:hidden;
-    width:100%;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-.carousel-track {
-    display:flex;
-    transition:transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    min-width:33.333%;
-    padding:10px;
-    box-sizing:border-box;
-}
-
-.carousel-item img {
-    width:100%;
-    height:250px;
-    object-fit:cover;
-    border-radius:15px;
-    transition:transform 0.3s;
-}
-
-.carousel-btn {
-    background:#ff4d6d;
-    color:white;
-    border:none;
-    padding:12px;
-    cursor:pointer;
-    border-radius:50%;
-    position:absolute;
-    z-index:10;
-    font-size:1rem;
-    box-shadow:0 4px 10px rgba(0,0,0,0.15);
-}
-
+.gallery-section { padding:60px 20px; text-align:center; width:100%; }
+.gallery-section h2 { color:#ff4d6d; margin-bottom:25px; }
+.carousel-container { position:relative; max-width:900px; margin:0 auto; display:flex; align-items:center; }
+.carousel-wrapper { overflow:hidden; width:100%; border-radius:20px; }
+.carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
+.carousel-item { min-width:33.333%; padding:10px; }
+.carousel-item img { width:100%; height:250px; object-fit:cover; border-radius:15px; }
+.carousel-btn { background:#ff4d6d; color:white; border:none; padding:12px; cursor:pointer; border-radius:50%; position:absolute; z-index:10; font-size:1rem; }
 .prev-btn { left:-15px; }
 .next-btn { right:-15px; }
 
 /* CARTA */
-.romantic-letter-section {
-    padding:60px 20px;
-}
-
-.letter-container {
-    max-width:700px;
-    margin:0 auto;
-    background:white;
-    padding:40px 30px;
-    border-radius:30px;
-    box-shadow:0 15px 40px rgba(255,143,171,0.1);
-    text-align:center;
-    border: 1px solid #ffe5ec;
-}
-
+.romantic-letter-section { padding:60px 20px; }
+.letter-container { max-width:700px; margin:0 auto; background:white; padding:40px 30px; border-radius:30px; box-shadow:0 15px 40px rgba(255,143,171,0.1); text-align:center; border: 1px solid #ffe5ec; }
 .letter-icon { font-size:2.5rem; margin-bottom:10px; }
-
-.letter-container h2 {
-    color:#ff4d6d;
-    margin-bottom:20px;
-    font-size:2rem;
-}
-
-.letter-content p {
-    font-size:1.1rem;
-    color:#555;
-    line-height:1.7;
-    margin-bottom:15px;
-    text-align:justify;
-}
+.letter-container h2 { color:#ff4d6d; margin-bottom:20px; font-size:2rem; }
+.letter-content p { font-size:1.1rem; color:#555; line-height:1.7; margin-bottom:15px; text-align:justify; }
 
 /* JOGO DA MEMÓRIA */
-.memory-game-section {
-    padding:60px 20px;
-    text-align:center;
-}
-
+.memory-game-section { padding:60px 20px; text-align:center; }
 .memory-game-section h2 { color:#ff4d6d; margin-bottom:5px; }
-
-.game-instruction { color:#666; margin-bottom:30px; }
-
-.memory-game {
-    max-width:650px;
-    margin:0 auto;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    perspective:1000px;
-}
-
-.memory-card {
-    height:120px;
-    position:relative;
-    transform-style:preserve-3d;
-    transition:transform 0.5s;
-    cursor:pointer;
-}
-
+.game-instruction { color:#666; margin-bottom:30px; padding: 0 15px; }
+.memory-game { max-width:650px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; perspective:1000px; padding: 0 15px; }
+.memory-card { height:120px; position:relative; transform-style:preserve-3d; transition:transform 0.5s; cursor:pointer; }
 .memory-card.flip { transform:rotateY(180deg); }
+.front-face, .back-face { width:100%; height:100%; position:absolute; border-radius:15px; backface-visibility:hidden; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.front-face { background:#ffffff; border:2px solid #ff8fab; overflow:hidden; padding: 0 !important; transform: rotateY(180deg); }
+.front-face img { width: 100% !important; height: 100% !important; display: block !important; object-fit: cover !important; object-position: center top !important; border-radius: 12px; }
+.back-face { background:linear-gradient(135deg,#ff8fab,#ff4d6d); color:white; font-size:1.8rem; }
 
-.front-face, .back-face {
-    width:100%;
-    height:100%;
-    position:absolute;
-    border-radius:15px;
-    backface-visibility:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 4px 12px rgba(0,0,0,0.05);
-}
-
-.front-face {
-    background:#ffffff; 
-    border:2px solid #ff8fab;
-    overflow:hidden;
-    padding: 0 !important; 
-    transform: rotateY(180deg);
-}
-
-.front-face img {
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    object-fit: cover !important; 
-    object-position: center top !important; 
-    border-radius: 12px;
-}
-
-.back-face {
-    background:linear-gradient(135deg,#ff8fab,#ff4d6d);
-    color:white;
-    font-size:1.8rem;
-}
-
-/* DESIGN DO NOVO SEÇÃO: CAÇA-PALAVRAS ROMÂNTICO */
+/* 🔍 CAÇA-PALAVRAS ROMÂNTICO (CORRIGIDO SEM ENCOSTAR NAS BORDAS) */
 .wordsearch-section {
-    padding:60px 20px 120px 20px;
+    padding:60px 25px; /* Margem interna global de segurança lateral */
     text-align:center;
     width:100%;
 }
-
-.wordsearch-section h2 {
-    color: #ff4d6d;
-    margin-bottom: 5px;
-}
-
 .wordsearch-container {
-    max-width: 850px;
+    max-width: 750px; /* Reduzido levemente para encaixar melhor com fôlego */
     margin: 0 auto;
     display: flex;
-    gap: 30px;
+    gap: 25px;
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 30px;
     box-shadow: 0 15px 40px rgba(255,143,171,0.1);
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
 }
+.ws-word-list { flex: 1; min-width: 220px; text-align: left; background: #fff4f6; padding: 20px; border-radius: 20px; border: 1px dashed #ff8fab; }
+.ws-word-list h3 { color: #ff4d6d; font-size: 1.1rem; margin-bottom: 15px; border-bottom: 2px solid #ffc2d1; padding-bottom: 5px; }
+.ws-word-list ul { list-style: none; }
+.ws-word-list li { font-size: 1rem; font-weight: 600; color: #666; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.ws-word-list li.word-found-line { color: #ff4d6d; text-decoration: line-through; opacity: 0.6; }
+.ws-word-list li.word-found-line::before { content: "💖"; text-decoration: none; }
+.ws-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; background: #ffe5ec; padding: 10px; border-radius: 20px; user-select: none; touch-action: none; }
+.ws-cell { width: 40px; height: 40px; background: white; color: #444; font-weight: bold; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; border-radius: 8px; cursor: pointer; }
+.ws-cell.selecting { background: #ff8fab; color: white; transform: scale(0.95); }
+.ws-cell.found { background: #ff4d6d; color: white; animation: matchPulse 0.4s ease-in-out; }
 
-/* Painel de Palavras Ocultas */
-.ws-word-list {
-    flex: 1;
-    min-width: 200px;
-    text-align: left;
-    background: #fff4f6;
+/* 🧩 JOGO 3: QUEBRA-CABEÇA SLIDER ROMÂNTICO */
+.puzzle-section {
+    padding: 60px 25px 140px 25px;
+    text-align: center;
+    width: 100%;
+}
+.puzzle-container {
+    max-width: 420px;
+    margin: 0 auto;
+    background: white;
     padding: 20px;
-    border-radius: 20px;
-    border: 1px dashed #ff8fab;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(255,143,171,0.1);
+    border: 1px solid #ffe5ec;
 }
-
-.ws-word-list h3 {
-    color: #ff4d6d;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ffc2d1;
-    padding-bottom: 5px;
-}
-
-.ws-word-list ul {
-    list-style: none;
-}
-
-.ws-word-list li {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #666;
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Efeito riscado para palavra já encontrada */
-.ws-word-list li.word-found-line {
-    color: #ff4d6d;
-    text-decoration: line-through;
-    opacity: 0.6;
-}
-
-.ws-word-list li.word-found-line::before {
-    content: "💖";
-    text-decoration: none;
-    display: inline-block;
-}
-
-/* Grade de Letras */
-.ws-grid {
+.puzzle-board {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
     background: #ffe5ec;
-    padding: 10px;
+    padding: 6px;
     border-radius: 20px;
-    user-select: none; /* Evita que o navegador selecione texto ao arrastar o dedo */
-    touch-action: none; /* Otimização crucial para arraste mobile */
+    width: 100%;
+    /* Mantém o quebra cabeça perfeitamente quadrado e responsivo em qualquer tela */
+    aspect-ratio: 1 / 1; 
 }
-
-/* Célula Letra Individual */
-.ws-cell {
-    width: 42px;
-    height: 42px;
-    background: white;
-    color: #444;
-    font-weight: bold;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
+.puzzle-piece {
+    background-color: #fff;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
+    transition: transform 0.2s ease, box-shadow 0.2s;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 2px 6px rgba(0,0,0,0.05);
+}
+.puzzle-piece:active {
+    transform: scale(0.96);
+}
+/* Estilo do quadrado vazio */
+.puzzle-piece.empty {
+    background-image: none !important;
+    background-color: #ffe5ec !important;
+    box-shadow: none;
+    cursor: default;
 }
 
-/* Estados da Célula */
-.ws-cell.selecting {
-    background: #ff8fab;
-    color: white;
-    transform: scale(0.95);
-}
-
-.ws-cell.found {
-    background: #ff4d6d;
-    color: white;
-    animation: matchPulse 0.4s ease-in-out;
-}
-
-@keyframes matchPulse {
-    50% { transform: scale(1.15); }
-}
-
-.win-message { 
-    margin-top:25px; 
-    color:#ff4d6d; 
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
-    display: inline-block;
-    box-shadow: 0 10px 25px rgba(255,77,109,0.1);
-}
+.win-message { margin-top:25px; color:#ff4d6d; background: white; padding: 20px; border-radius: 20px; display: inline-block; box-shadow: 0 10px 25px rgba(255,77,109,0.1); }
 
 /* RESPONSIVIDADE COMPLETA */
 @media(max-width:768px){
-    .iphone-mockup {
-        width:290px;
-        height:600px;
-        border-width:8px;
-    }
+    .iphone-mockup { width:290px; height:600px; border-width:8px; }
     .modern-title { font-size:2.2rem; }
     .carousel-item { min-width:100%; }
     .prev-btn { left:5px; }
     .next-btn { right:5px; }
-    .memory-game { grid-template-columns:repeat(2,1fr); }
+    .memory-game { grid-template-columns:repeat(2,1fr); gap: 10px; }
     .memory-card { height:100px; }
-    .floating-music-player {
-        bottom: 15px;
-        right: 15px;
-        padding: 8px 15px;
-    }
+    .floating-music-player { bottom: 15px; right: 15px; padding: 8px 15px; }
     
-    /* Ajuste do Caça-Palavras para Telas de Celular */
-    .wordsearch-container {
-        flex-direction: column;
-        padding: 15px;
-    }
-    .ws-word-list {
-        width: 100%;
-    }
-    .ws-grid {
-        gap: 4px;
-        padding: 6px;
-        width: 100%;
-        max-width: 340px;
-    }
-    .ws-cell {
-        width: 30px;
-        height: 30px;
-        font-size: 0.9rem;
-        border-radius: 5px;
-    }
+    /* Proteção extrema contra bordas no Mobile */
+    .wordsearch-section, .puzzle-section { padding-left: 20px; padding-right: 20px; }
+    .wordsearch-container { flex-direction: column; padding: 15px; width: 100%; }
+    .ws-word-list { width: 100%; }
+    .ws-grid { gap: 4px; padding: 6px; width: 100%; max-width: 320px; margin: 0 auto; }
+    .ws-cell { width: 28px; height: 28px; font-size: 0.85rem; border-radius: 6px; }
+    
+    .puzzle-container { padding: 12px; width: 100%; max-width: 340px; }
+    .puzzle-board { padding: 4px; gap: 3px; border-radius: 15px; }
+    .puzzle-piece { border-radius: 8px; }
 }
