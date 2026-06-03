@@ -10,11 +10,9 @@
 
 <body>
 
-    <!-- EFEITOS DE FUNDO (PÉTALAS E ESTRELAS CINTILANTES) -->
     <div class="floating-hearts"></div>
     <div class="floating-stars"></div>
 
-    <!-- TELA PRESENTE -->
     <section id="gift-screen">
         <div class="gift-container">
             <h2>Você recebeu um presente especial 🎁</h2>
@@ -26,10 +24,8 @@
         </div>
     </section>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main id="main-content">
 
-        <!-- SLIDER MOLDURA IPHONE -->
         <section class="iphone-slider-section">
             <div class="iphone-mockup">
                 <div class="iphone-notch"></div>
@@ -47,7 +43,6 @@
             </div>
         </section>
 
-        <!-- CONTADOR DE TEMPO -->
         <section class="counter-section">
             <h2>Nosso Tempo Juntos ⏳</h2>
             <div id="timer">
@@ -70,7 +65,6 @@
             </div>
         </section>
 
-        <!-- CARROSSEL DE GALERIA DE FOTOS -->
         <section class="gallery-section">
             <h2>Nossos Momentos 📸</h2>
             <div class="carousel-container">
@@ -82,7 +76,6 @@
             </div>
         </section>
 
-        <!-- TEXTO ROMÂNTICO -->
         <section class="romantic-letter-section">
             <div class="letter-container">
                 <div class="letter-icon">💝</div>
@@ -91,7 +84,6 @@
             </div>
         </section>
 
-        <!-- JOGO DA MEMÓRIA -->
         <section class="memory-game-section">
             <h2>Jogo da Memória do Nosso Amor 🧩</h2>
             <p class="game-instruction">Encontre os pares de fotos que combinam! As fotos mudam sempre que você atualiza a página.</p>
@@ -101,29 +93,36 @@
             </div>
         </section>
 
-        <!-- JOGO 2: CAÇA-PALAVRAS ROMÂNTICO -->
+        <!-- JOGO 2: CAÇA-PALAVRAS ROMÂNTICO (Ajustado com Respiro Lateral) -->
         <section class="wordsearch-section">
             <h2>Caça-Palavras do Casal 🔍❤️</h2>
             <p class="game-instruction">Encontre as palavras ocultas arrastando ou clicando sobre as letras na tabela!</p>
-            
             <div class="wordsearch-container">
-                <!-- Lista de palavras que precisam ser encontradas -->
                 <div class="ws-word-list">
                     <h3>Palavras Ocultas:</h3>
                     <ul id="wordListUl"></ul>
                 </div>
-                <!-- Grade do caça palavras -->
                 <div class="ws-grid" id="wordSearchGrid"></div>
             </div>
-
             <div id="wordSearchWinMessage" class="win-message" style="display: none;">
                 <h3>Incrível! Você achou tudo! Você conhece cada pedacinho do nosso amor! 💕🥰</h3>
             </div>
         </section>
 
+        <!-- JOGO 3: QUEBRA-CABEÇA SLIDER ROMÂNTICO -->
+        <section class="puzzle-section">
+            <h2>Quebra-Cabeça do Amor 🧩❤</h2>
+            <p class="game-instruction">Clique nas peças vizinhas ao espaço em branco para movê-las e revelar a foto secreta!</p>
+            <div class="puzzle-container">
+                <div id="puzzleBoard" class="puzzle-board"></div>
+            </div>
+            <div id="puzzleWinMessage" class="win-message" style="display: none;">
+                <h3>Você é a minha peça que faltava! Foto montada com sucesso! 😍💑❤️</h3>
+            </div>
+        </section>
+
     </main>
 
-    <!-- PLAYER FLUTUANTE DE ÁUDIO -->
     <div class="floating-music-player" id="musicPlayerControl" title="Clique para Tocar / Pausar">
         <div class="player-icon-box" id="playerIcon">🎵</div>
         <div class="player-info">
