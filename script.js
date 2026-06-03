@@ -3,7 +3,7 @@
 // ==========================================================================
 const CONFIG = {
     // 🎵 APENAS O ID DO VÍDEO DO YOUTUBE (Exemplo: se o link é youtube.com/watch?v=TynFsTZlGDU, o ID é TynFsTZlGDU)
-    idYouTube: "TynFsTZlGDU",
+    idYouTube: "rMgaguZTBqg",
     
     // Nome da música que vai aparecer no painel flutuante após o clique
     nomeMusica: "Nossa Música Favorita 💕",
@@ -42,8 +42,13 @@ const CONFIG = {
     ],
 
     // 🔍 PALAVRAS PARA O CAÇA-PALAVRAS ROMÂNTICO
-    // Use palavras de até 9 letras para encaixar perfeitamente na tabela do celular.
-    palavrasCaca: ["AMOR", "SEMPRE", "BEIJO", "DESTINO", "JOAO", "MARIA"]
+    palavrasCaca: ["AMOR", "SEMPRE", "BEIJO", "DESTINO", "JOAO", "MARIA"],
+
+    // 🧩 BANCO DE FOTOS PARA O QUEBRA-CABEÇA (O sistema escolhe uma aleatória por carregamento)
+    // Dica: Use fotos quadradas (proporção 1:1) para o encaixe perfeito das peças!
+    fotosQuebraCabeca: [
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg"
+    ]
 };
 
 // ==========================================================================
@@ -139,7 +144,8 @@ function abrirPresente(){
     setInterval(updateTimer, 1000);
     startAutoCarousel();
     initMemoryGame();
-    initWordSearch(); // Inicializa o Caça-Palavras
+    initWordSearch();
+    initPuzzle(); // Inicializa o Quebra-Cabeça
 
     setTimeout(function(){
         if(giftScreen) giftScreen.style.display = "none";
@@ -210,14 +216,8 @@ function moveCarousel(direction) {
 }
 function startAutoCarousel() { carouselTimeout = setInterval(() => { moveCarousel(1); }, 3000); }
 function resetCarouselAutoPlay() { clearInterval(carouselTimeout); startAutoCarousel(); }
-window.addEventListener('resize', () => {
-    const track = document.getElementById("carouselTrack");
-    if(track) { track.style.transform = `translateX(0px)`; carouselIndex = 0; }
-});
 
-// ==========================================================================
 // JOGO DA MEMÓRIA
-// ==========================================================================
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
@@ -264,10 +264,8 @@ function unflipCards() {
 }
 function resetBoard() { [hasFlippedCard, lockBoard] = [false, false]; [firstCard, secondCard] = [null, null]; }
 
-// ==========================================================================
-// NUEVO JOGO: CAÇA-PALAVRAS ROMÂNTICO
-// ==========================================================================
-const gridSize = 10; // Matriz de 10x10 ideal para celular
+// CAÇA-PALAVRAS ROMÂNTICO
+const gridSize = 10; 
 let gridMatrix = [];
 let foundWords = [];
 let isSelectingWords = false;
@@ -283,22 +281,19 @@ function initWordSearch() {
     foundWords = [];
     document.getElementById("wordSearchWinMessage").style.display = "none";
 
-    // Cria a lista lateral de palavras para achar
     CONFIG.palavrasCaca.forEach(word => {
         wordListUl.innerHTML += `<li id="word-list-${word.toUpperCase()}">${word.toUpperCase()}</li>`;
     });
 
-    // Gera a matriz vazia preenchida com espaços
     gridMatrix = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
 
-    // Tenta embutir as palavras configuradas na matriz de forma inteligente
     CONFIG.palavrasCaca.forEach(word => {
         let placed = false;
         let attempts = 0;
         word = word.toUpperCase();
 
         while (!placed && attempts < 100) {
-            let direction = Math.floor(Math.random() * 2); // 0 = Horizontal, 1 = Vertical
+            let direction = Math.floor(Math.random() * 2); 
             let row = Math.floor(Math.random() * gridSize);
             let col = Math.floor(Math.random() * gridSize);
 
@@ -310,7 +305,6 @@ function initWordSearch() {
         }
     });
 
-    // Preenche as lacunas restantes com letras aleatórias limpas
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (let r = 0; r < gridSize; r++) {
         for (let c = 0; c < gridSize; c++) {
@@ -320,7 +314,6 @@ function initWordSearch() {
         }
     }
 
-    // Renderiza a tabela na tela injetando os eventos de clique por célula
     for (let r = 0; r < gridSize; r++) {
         for (let c = 0; c < gridSize; c++) {
             const cellDiv = document.createElement("div");
@@ -329,7 +322,6 @@ function initWordSearch() {
             cellDiv.dataset.row = r;
             cellDiv.dataset.col = c;
 
-            // Eventos unificados para computador e toque mobile
             cellDiv.addEventListener("mousedown", startWordSelection);
             cellDiv.addEventListener("mouseenter", elementSelectionHover);
             gridContainer.appendChild(cellDiv);
@@ -337,7 +329,6 @@ function initWordSearch() {
     }
 
     window.addEventListener("mouseup", endWordSelection);
-    // Suporte específico para arrastar o dedo no Mobile Touch
     gridContainer.addEventListener("touchmove", handleMobileTouchMove, {passive: false});
     gridContainer.addEventListener("touchend", endWordSelection);
 }
@@ -345,7 +336,6 @@ function initWordSearch() {
 function canPlaceWord(word, row, col, direction) {
     if (direction === 0 && col + word.length > gridSize) return false;
     if (direction === 1 && row + word.length > gridSize) return false;
-
     for (let i = 0; i < word.length; i++) {
         let r = direction === 1 ? row + i : row;
         let c = direction === 0 ? col + i : col;
@@ -353,7 +343,6 @@ function canPlaceWord(word, row, col, direction) {
     }
     return true;
 }
-
 function placeWord(word, row, col, direction) {
     for (let i = 0; i < word.length; i++) {
         let r = direction === 1 ? row + i : row;
@@ -361,61 +350,175 @@ function placeWord(word, row, col, direction) {
         gridMatrix[r][c] = word[i];
     }
 }
-
-function startWordSelection(e) {
-    isSelectingWords = true;
-    selectedCellsList = [];
-    selectCellElement(this);
-}
-
-function elementSelectionHover() {
-    if (!isSelectingWords) return;
-    selectCellElement(this);
-}
-
+function startWordSelection(e) { isSelectingWords = true; selectedCellsList = []; selectCellElement(this); }
+function elementSelectionHover() { if (!isSelectingWords) return; selectCellElement(this); }
 function handleMobileTouchMove(e) {
     if (!isSelectingWords) isSelectingWords = true;
     e.preventDefault();
     const touch = e.touches[0];
     const element = document.elementFromPoint(touch.clientX, touch.clientY);
-    if (element && element.classList.contains("ws-cell")) {
-        selectCellElement(element);
-    }
+    if (element && element.classList.contains("ws-cell")) { selectCellElement(element); }
 }
-
 function selectCellElement(cell) {
     if (cell.classList.contains("found") || selectedCellsList.includes(cell)) return;
     cell.classList.add("selecting");
     selectedCellsList.push(cell);
 }
-
 function endWordSelection() {
     if (!isSelectingWords) return;
     isSelectingWords = false;
-
-    // Constrói a palavra com base nas células selecionadas pelo usuário
     let builtWord = selectedCellsList.map(cell => cell.innerText).join("");
     let reverseWord = builtWord.split("").reverse().join("");
-
     let matchedWord = "";
     if (CONFIG.palavrasCaca.map(w => w.toUpperCase()).includes(builtWord)) matchedWord = builtWord;
     else if (CONFIG.palavrasCaca.map(w => w.toUpperCase()).includes(reverseWord)) matchedWord = reverseWord;
 
     if (matchedWord !== "" && !foundWords.includes(matchedWord)) {
         foundWords.push(matchedWord);
-        selectedCellsList.forEach(cell => {
-            cell.classList.remove("selecting");
-            cell.classList.add("found");
-        });
+        selectedCellsList.forEach(cell => { cell.classList.remove("selecting"); cell.classList.add("found"); });
         const listElement = document.getElementById(`word-list-${matchedWord}`);
         if (listElement) listElement.classList.add("word-found-line");
-        
-        // Verifica vitória
-        if (foundWords.length === CONFIG.palavrasCaca.length) {
-            document.getElementById("wordSearchWinMessage").style.display = "block";
-        }
-    } else {
-        selectedCellsList.forEach(cell => cell.classList.remove("selecting"));
-    }
+        if (foundWords.length === CONFIG.palavrasCaca.length) { document.getElementById("wordSearchWinMessage").style.display = "block"; }
+    } else { selectedCellsList.forEach(cell => cell.classList.remove("selecting")); }
     selectedCellsList = [];
+}
+
+// ==========================================================================
+// JOGO 3: QUEBRA-CABEÇA SLIDER ROMÂNTICO (DINÂMICO E RESPONSIVO)
+// ==========================================================================
+let puzzleSize = 3; // Grid de 3x3 (8 peças e 1 espaço vazio)
+let puzzleOrder = [];
+let correctPuzzleOrder = [];
+
+function initPuzzle() {
+    const board = document.getElementById("puzzleBoard");
+    if (!board) return;
+    board.innerHTML = "";
+    document.getElementById("puzzleWinMessage").style.display = "none";
+
+    // 1. Seleciona uma foto aleatória da configuração
+    const fotoAleatoria = CONFIG.fotosQuebraCabeca[Math.floor(Math.random() * CONFIG.fotosQuebraCabeca.length)];
+
+    // 2. Cria as posições corretas e embaralha
+    puzzleOrder = [];
+    correctPuzzleOrder = [];
+    let totalPieces = puzzleSize * puzzleSize;
+
+    for (let i = 0; i < totalPieces; i++) {
+        correctPuzzleOrder.push(i);
+        puzzleOrder.push(i);
+    }
+
+    // Embaralha de forma válida
+    do {
+        puzzleOrder.sort(() => Math.random() - 0.5);
+    } while (!isPuzzleSolvable() || isPuzzleCorrect());
+
+    // 3. Renderiza as peças usando fatias da imagem via CSS Background
+    puzzleOrder.forEach((pos, index) => {
+        const piece = document.createElement("div");
+        piece.classList.add("puzzle-piece");
+        piece.dataset.index = index;
+
+        if (pos === totalPieces - 1) {
+            piece.classList.add("empty"); // A última peça vira o espaço em branco
+        } else {
+            piece.style.backgroundImage = `url('${fotoAleatoria}')`;
+            
+            // Calcula o fatiamento da imagem em porcentagem
+            let row = Math.floor(pos / puzzleSize);
+            let col = pos % puzzleSize;
+            let percentX = (col / (puzzleSize - 1)) * 100;
+            let percentY = (row / (puzzleSize - 1)) * 100;
+            
+            piece.style.backgroundSize = `${puzzleSize * 100}% ${puzzleSize * 100}%`;
+            piece.style.backgroundPosition = `${percentX}% ${percentY}%`;
+            
+            piece.addEventListener("click", () => movePuzzlePiece(index));
+        }
+        board.appendChild(piece);
+    });
+}
+
+function movePuzzlePiece(clickedIndex) {
+    let emptyIndex = puzzleOrder.indexOf(puzzleSize * puzzleSize - 1);
+
+    // Valida se a peça clicada é vizinha (cima, baixo, esquerda, direita) do espaço vazio
+    let clickedRow = Math.floor(clickedIndex / puzzleSize);
+    let clickedCol = clickedIndex % puzzleSize;
+    let emptyRow = Math.floor(emptyIndex / puzzleSize);
+    let emptyCol = emptyIndex % puzzleSize;
+
+    let isNeighbor = (Math.abs(clickedRow - emptyRow) + Math.abs(clickedCol - emptyCol)) === 1;
+
+    if (isNeighbor) {
+        // Inverte a posição das peças no array
+        let temp = puzzleOrder[clickedIndex];
+        puzzleOrder[clickedIndex] = puzzleOrder[emptyIndex];
+        puzzleOrder[emptyIndex] = temp;
+
+        // Atualiza a renderização na tela
+        initPuzzleRenderFromOrder();
+
+        // Checa vitória
+        if (isPuzzleCorrect()) {
+            document.getElementById("puzzleWinMessage").style.display = "block";
+            // Mostra a última peça que estava escondida para completar a foto inteira!
+            const emptyCell = document.querySelector(".puzzle-piece.empty");
+            if (emptyCell) emptyCell.classList.remove("empty");
+        }
+    }
+}
+
+function initPuzzleRenderFromOrder() {
+    const pieces = document.querySelectorAll(".puzzle-piece");
+    const board = document.getElementById("puzzleBoard");
+    if (!board) return;
+
+    // Pega a imagem que já estava rodando
+    let bgImg = "";
+    for (let p of pieces) {
+        if (p.style.backgroundImage) { bgImg = p.style.backgroundImage; break; }
+    }
+
+    board.innerHTML = "";
+    let totalPieces = puzzleSize * puzzleSize;
+
+    puzzleOrder.forEach((pos, index) => {
+        const piece = document.createElement("div");
+        piece.classList.add("puzzle-piece");
+        piece.dataset.index = index;
+
+        if (pos === totalPieces - 1) {
+            piece.classList.add("empty");
+        } else {
+            piece.style.backgroundImage = bgImg;
+            let row = Math.floor(pos / puzzleSize);
+            let col = pos % puzzleSize;
+            let percentX = (col / (puzzleSize - 1)) * 100;
+            let percentY = (row / (puzzleSize - 1)) * 100;
+            piece.style.backgroundSize = `${puzzleSize * 100}% ${puzzleSize * 100}%`;
+            piece.style.backgroundPosition = `${percentX}% ${percentY}%`;
+            piece.addEventListener("click", () => movePuzzlePiece(index));
+        }
+        board.appendChild(piece);
+    });
+}
+
+function isPuzzleCorrect() {
+    return puzzleOrder.every((val, i) => val === correctPuzzleOrder[i]);
+}
+
+// Garante matematicamente que o jogo gerado tem solução física
+function isPuzzleSolvable() {
+    let inversions = 0;
+    let length = puzzleOrder.length - 1;
+    for (let i = 0; i < length; i++) {
+        for (let j = i + 1; j <= length; j++) {
+            if (puzzleOrder[i] > puzzleOrder[j] && puzzleOrder[i] !== length && puzzleOrder[j] !== length) {
+                inversions++;
+            }
+        }
+    }
+    return inversions % 2 === 0;
 }
