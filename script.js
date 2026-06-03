@@ -52,6 +52,7 @@ const giftScreen = document.querySelector("#gift-screen");
 const mainContent = document.querySelector("#main-content");
 let ytPlayer; 
 
+// Inicializa o script assíncrono do YouTube
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -98,6 +99,7 @@ function aplicarConfiguracoes() {
     }
 }
 
+// Executa a montagem do layout básico imediatamente
 aplicarConfiguracoes();
 
 if(giftBox) {
@@ -105,9 +107,10 @@ if(giftBox) {
 }
 
 function abrirPresente(){
-    giftScreen.style.opacity = "0";
-    mainContent.style.display = "flex";
+    if(giftScreen) giftScreen.style.opacity = "0";
+    if(mainContent) mainContent.style.display = "flex";
 
+    // Executa o player oficial
     if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
         ytPlayer.playVideo();
     }
@@ -124,7 +127,7 @@ function abrirPresente(){
     initMemoryGame();
 
     setTimeout(function(){
-        giftScreen.style.display = "none";
+        if(giftScreen) giftScreen.style.display = "none";
     }, 1000);
 }
 
@@ -214,16 +217,13 @@ function initMemoryGame() {
     if(document.getElementById("gameWinMessage")) document.getElementById("gameWinMessage").style.display = "none";
     totalMatchesFound = 0;
 
-    // Seleciona 4 fotos aleatórias da configuração
     const fotosSelecionadas = [...CONFIG.fotosJogo]
         .sort(() => 0.5 - Math.random())
         .slice(0, 4);
 
-    // Duplica para criar os pares
     let cartasDoJogo = [...fotosSelecionadas, ...fotosSelecionadas];
     cartasDoJogo.sort(() => 0.5 - Math.random());
 
-    // Cria as cartas no tabuleiro injetando a tag img
     cartasDoJogo.forEach(foto => {
         const card = document.createElement("div");
         card.classList.add("memory-card");
