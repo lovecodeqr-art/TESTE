@@ -26,7 +26,7 @@ body{
     pointer-events: none;
 }
 
-/* PLAYER FLUTUANTE PREMIUM COM EFEITO DE HOVER INTERATIVO */
+/* PLAYER FLUTUANTE PREMIUM */
 .floating-music-player {
     position: fixed;
     bottom: 25px;
@@ -67,7 +67,6 @@ body{
     font-size: 1.1rem;
 }
 
-/* O ícone só gira de verdade se a música estiver ativamente tocando */
 .player-icon-box.playing {
     animation: rotateMusic 4s linear infinite;
 }
@@ -95,7 +94,7 @@ body{
     100% { transform: rotate(360deg); }
 }
 
-/* PÉTALAS DE ROSAS E ESTRELAS CINTILANTES */
+/* PÉTALAS DE ROSAS E ESTRELAS */
 .floating-hearts,
 .floating-stars{
     position:fixed;
@@ -141,7 +140,7 @@ body{
     50% { opacity: 1; }
 }
 
-/* TELA DE INTRODUÇÃO (PRESENTE) */
+/* TELA PRESENTE */
 #gift-screen{
     width:100%;
     height:100vh;
@@ -370,7 +369,7 @@ body{
     font-size:0.9rem;
 }
 
-/* CARROSSEL DE MINIATURAS */
+/* CARROSSEL */
 .gallery-section {
     padding:60px 20px;
     text-align:center;
@@ -432,7 +431,7 @@ body{
 .prev-btn { left:-15px; }
 .next-btn { right:-15px; }
 
-/* CARTA APAIXONADA */
+/* CARTA */
 .romantic-letter-section {
     padding:60px 20px;
 }
@@ -464,9 +463,9 @@ body{
     text-align:justify;
 }
 
-/* JOGO DA MEMÓRIA COM ENQUADRAMENTO INTELIGENTE CORRIGIDO */
+/* JOGO DA MEMÓRIA */
 .memory-game-section {
-    padding:60px 20px 100px 20px;
+    padding:60px 20px;
     text-align:center;
 }
 
@@ -528,7 +527,133 @@ body{
     font-size:1.8rem;
 }
 
-.win-message { margin-top:25px; color:#ff4d6d; }
+/* DESIGN DO NOVO SEÇÃO: CAÇA-PALAVRAS ROMÂNTICO */
+.wordsearch-section {
+    padding:60px 20px 120px 20px;
+    text-align:center;
+    width:100%;
+}
+
+.wordsearch-section h2 {
+    color: #ff4d6d;
+    margin-bottom: 5px;
+}
+
+.wordsearch-container {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    background: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(255,143,171,0.1);
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Painel de Palavras Ocultas */
+.ws-word-list {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+    background: #fff4f6;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px dashed #ff8fab;
+}
+
+.ws-word-list h3 {
+    color: #ff4d6d;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ffc2d1;
+    padding-bottom: 5px;
+}
+
+.ws-word-list ul {
+    list-style: none;
+}
+
+.ws-word-list li {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Efeito riscado para palavra já encontrada */
+.ws-word-list li.word-found-line {
+    color: #ff4d6d;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.ws-word-list li.word-found-line::before {
+    content: "💖";
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Grade de Letras */
+.ws-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    background: #ffe5ec;
+    padding: 10px;
+    border-radius: 20px;
+    user-select: none; /* Evita que o navegador selecione texto ao arrastar o dedo */
+    touch-action: none; /* Otimização crucial para arraste mobile */
+}
+
+/* Célula Letra Individual */
+.ws-cell {
+    width: 42px;
+    height: 42px;
+    background: white;
+    color: #444;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+/* Estados da Célula */
+.ws-cell.selecting {
+    background: #ff8fab;
+    color: white;
+    transform: scale(0.95);
+}
+
+.ws-cell.found {
+    background: #ff4d6d;
+    color: white;
+    animation: matchPulse 0.4s ease-in-out;
+}
+
+@keyframes matchPulse {
+    50% { transform: scale(1.15); }
+}
+
+.win-message { 
+    margin-top:25px; 
+    color:#ff4d6d; 
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0 10px 25px rgba(255,77,109,0.1);
+}
 
 /* RESPONSIVIDADE COMPLETA */
 @media(max-width:768px){
@@ -547,5 +672,26 @@ body{
         bottom: 15px;
         right: 15px;
         padding: 8px 15px;
+    }
+    
+    /* Ajuste do Caça-Palavras para Telas de Celular */
+    .wordsearch-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .ws-word-list {
+        width: 100%;
+    }
+    .ws-grid {
+        gap: 4px;
+        padding: 6px;
+        width: 100%;
+        max-width: 340px;
+    }
+    .ws-cell {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+        border-radius: 5px;
     }
 }
