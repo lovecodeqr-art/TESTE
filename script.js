@@ -51,7 +51,6 @@ const giftScreen = document.querySelector("#gift-screen");
 const mainContent = document.querySelector("#main-content");
 let ytPlayer; 
 
-// Carrega os scripts da API do YouTube de forma assíncrona
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -128,7 +127,6 @@ function abrirPresente(){
     }, 1000);
 }
 
-// SLIDESHOW INTERNO DO IPHONE
 let slideIndex = 0;
 let slideshowTimeout;
 
@@ -145,7 +143,6 @@ function startSlideshow(){
     slideshowTimeout = setTimeout(startSlideshow, 3500);
 }
 
-// CONTADOR DE TEMPO JUNTOS
 function updateTimer(){
     const now = new Date();
     const difference = now - CONFIG.dataInicio;
@@ -163,7 +160,6 @@ function updateTimer(){
     if(document.querySelector("#seconds")) document.querySelector("#seconds").innerText = String(seconds).padStart(2, '0');
 }
 
-// CARROSSEL AUTOMÁTICO
 let carouselIndex = 0;
 let carouselTimeout;
 
@@ -205,9 +201,6 @@ window.addEventListener('resize', () => {
     }
 });
 
-// ==========================================================================
-// JOGO DA MEMÓRIA ADAPTADO PARA FOTOS
-// ==========================================================================
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
@@ -220,26 +213,21 @@ function initMemoryGame() {
     if(document.getElementById("gameWinMessage")) document.getElementById("gameWinMessage").style.display = "none";
     totalMatchesFound = 0;
 
-    // 1. Seleciona 4 fotos aleatórias da lista de configurações
     const fotosSelecionadas = [...CONFIG.fotosJogo]
         .sort(() => 0.5 - Math.random())
         .slice(0, 4);
 
-    // 2. Duplica as fotos para formar os pares obrigatórios
     let cartasDoJogo = [...fotosSelecionadas, ...fotosSelecionadas];
-    
-    // 3. Embaralha a posição final das 8 cartas
     cartasDoJogo.sort(() => 0.5 - Math.random());
 
-    // 4. Cria a estrutura HTML injetando a tag img na face da carta
     cartasDoJogo.forEach(foto => {
         const card = document.createElement("div");
         card.classList.add("memory-card");
-        card.dataset.photo = foto; // Guarda o caminho para validar o par depois
+        card.dataset.photo = foto;
 
         card.innerHTML = `
             <div class="front-face">
-                <img src="${foto}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" alt="Foto Jogo">
+                <img src="${foto}" alt="Foto Jogo">
             </div>
             <div class="back-face">❤</div>
         `;
@@ -266,7 +254,6 @@ function flipCard() {
 }
 
 function checkForMatch() {
-    // Validação estrita baseada no caminho da foto guardado no dataset
     let isMatch = firstCard.dataset.photo === secondCard.dataset.photo;
     isMatch ? disableCards() : unflipCards();
 }
