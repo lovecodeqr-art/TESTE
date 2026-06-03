@@ -34,18 +34,11 @@ const CONFIG = {
         "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg"
     ],
 
-    // Banco de Frases para o Jogo da Memória (O sistema escolhe 4 aleatórias a cada carregamento)
-    poolFrasesJogo: [
-        "Você é meu sol nos dias nublados ☀️",
-        "Te amo mais a cada segundo ❤️",
-        "Minha parte favorita do dia é você 🥰",
-        "Nosso amor foi a melhor escolha 🌹",
-        "Você é o meu lar preferido 🏡",
-        "Com você o mundo é mais bonito 🌎",
-        "Meu coração bate no seu ritmo 💓",
-        "Juntos somos invencíveis 💑",
-        "Seu abraço é o meu porto seguro ⚓",
-        "Você é meu sonho que virou realidade ✨"
+    // 📸 BANCO DE FOTOS PARA O JOGO DA MEMÓRIA
+    // O sistema escolherá 4 fotos desta lista aleatoriamente a cada carregamento
+    fotosJogo: [
+        "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg",
+        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg", "imag/foto10.jpg"
     ]
 };
 
@@ -56,6 +49,30 @@ const CONFIG = {
 const giftBox = document.querySelector("#giftBox");
 const giftScreen = document.querySelector("#gift-screen");
 const mainContent = document.querySelector("#main-content");
+let ytPlayer; 
+
+// Carrega os scripts da API do YouTube de forma assíncrona
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('audioBackgroundIframe', {
+        height: '1',
+        width: '1',
+        videoId: CONFIG.idYouTube,
+        playerVars: {
+            'autoplay': 0,
+            'loop': 1,
+            'playlist': CONFIG.idYouTube,
+            'controls': 0,
+            'showinfo': 0,
+            'rel': 0,
+            'modestbranding': 1
+        }
+    });
+}
 
 function aplicarConfiguracoes() {
     if(document.getElementById("txtNomeEle")) document.getElementById("txtNomeEle").innerText = CONFIG.nomeEle;
@@ -64,7 +81,6 @@ function aplicarConfiguracoes() {
     if(document.getElementById("boxTextoCarta")) document.getElementById("boxTextoCarta").innerHTML = CONFIG.textoCarta;
     if(document.getElementById("txtNomeMusica")) document.getElementById("txtNomeMusica").innerText = CONFIG.nomeMusica;
 
-    // Monta o Slider Inicial do iPhone dinamicamente
     const sliderContainer = document.getElementById("sliderDinamico");
     if(sliderContainer) {
         sliderContainer.innerHTML = "";
@@ -73,7 +89,6 @@ function aplicarConfiguracoes() {
         });
     }
 
-    // Monta o Carrossel de Fotos dinamicamente
     const carrosselTrack = document.getElementById("carouselTrack");
     if(carrosselTrack) {
         carrosselTrack.innerHTML = "";
@@ -83,7 +98,6 @@ function aplicarConfiguracoes() {
     }
 }
 
-// Executa a injeção dos dados assim que a página abre
 aplicarConfiguracoes();
 
 if(giftBox) {
@@ -94,14 +108,10 @@ function abrirPresente(){
     giftScreen.style.opacity = "0";
     mainContent.style.display = "flex";
 
-    // Injeta e ativa o player invisível com base estrita no ID fornecido
-    const linkConstruido = `https://www.youtube.com/embed/${CONFIG.idYouTube}?autoplay=1&loop=1&playlist=${CONFIG.idYouTube}`;
-    const iframeAudio = document.getElementById("audioBackgroundIframe");
-    if(iframeAudio) {
-        iframeAudio.src = linkConstruido;
+    if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+        ytPlayer.playVideo();
     }
 
-    // Exibe o painel de controle flutuante elegantemente
     const musicControl = document.getElementById("musicPlayerControl");
     if(musicControl) {
         musicControl.classList.add("show");
@@ -195,7 +205,9 @@ window.addEventListener('resize', () => {
     }
 });
 
-// JOGO DA MEMÓRIA COM FRASES
+// ==========================================================================
+// JOGO DA MEMÓRIA ADAPTADO PARA FOTOS
+// ==========================================================================
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
@@ -208,20 +220,27 @@ function initMemoryGame() {
     if(document.getElementById("gameWinMessage")) document.getElementById("gameWinMessage").style.display = "none";
     totalMatchesFound = 0;
 
-    const frasesSelecionadas = [...CONFIG.poolFrasesJogo]
+    // 1. Seleciona 4 fotos aleatórias da lista de configurações
+    const fotosSelecionadas = [...CONFIG.fotosJogo]
         .sort(() => 0.5 - Math.random())
         .slice(0, 4);
 
-    let cartasDoJogo = [...frasesSelecionadas, ...frasesSelecionadas];
+    // 2. Duplica as fotos para formar os pares obrigatórios
+    let cartasDoJogo = [...fotosSelecionadas, ...fotosSelecionadas];
+    
+    // 3. Embaralha a posição final das 8 cartas
     cartasDoJogo.sort(() => 0.5 - Math.random());
 
-    cartasDoJogo.forEach(frase => {
+    // 4. Cria a estrutura HTML injetando a tag img na face da carta
+    cartasDoJogo.forEach(foto => {
         const card = document.createElement("div");
         card.classList.add("memory-card");
-        card.dataset.phrase = frase;
+        card.dataset.photo = foto; // Guarda o caminho para validar o par depois
 
         card.innerHTML = `
-            <div class="front-face">${frase}</div>
+            <div class="front-face">
+                <img src="${foto}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" alt="Foto Jogo">
+            </div>
             <div class="back-face">❤</div>
         `;
 
@@ -247,7 +266,8 @@ function flipCard() {
 }
 
 function checkForMatch() {
-    let isMatch = firstCard.dataset.phrase === secondCard.dataset.phrase;
+    // Validação estrita baseada no caminho da foto guardado no dataset
+    let isMatch = firstCard.dataset.photo === secondCard.dataset.photo;
     isMatch ? disableCards() : unflipCards();
 }
 
