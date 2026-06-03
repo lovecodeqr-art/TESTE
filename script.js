@@ -32,7 +32,7 @@ const CONFIG = {
 
     // Caminho das 10 Fotos da Galeria em Carrossel (Fotos menores abaixo)
     fotosGaleria: [
-        "imag/foto9.jpg","imag/foto10.jpg", "imag/foto11.jpg","imag/foto12.jpg","imag/foto13.jpg"
+        "imag/foto9.jpg", "imag/foto10.jpg", "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg"
     ],
 
     // 📸 BANCO DE FOTOS PARA O JOGO DA MEMÓRIA
