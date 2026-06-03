@@ -213,13 +213,16 @@ function initMemoryGame() {
     if(document.getElementById("gameWinMessage")) document.getElementById("gameWinMessage").style.display = "none";
     totalMatchesFound = 0;
 
+    // Seleciona 4 fotos aleatórias da configuração
     const fotosSelecionadas = [...CONFIG.fotosJogo]
         .sort(() => 0.5 - Math.random())
         .slice(0, 4);
 
+    // Duplica para criar os pares
     let cartasDoJogo = [...fotosSelecionadas, ...fotosSelecionadas];
     cartasDoJogo.sort(() => 0.5 - Math.random());
 
+    // Cria as cartas no tabuleiro injetando a tag img
     cartasDoJogo.forEach(foto => {
         const card = document.createElement("div");
         card.classList.add("memory-card");
@@ -227,7 +230,7 @@ function initMemoryGame() {
 
         card.innerHTML = `
             <div class="front-face">
-                <img src="${foto}" alt="Foto Jogo">
+                <img src="${foto}" alt="Foto Casal">
             </div>
             <div class="back-face">❤</div>
         `;
