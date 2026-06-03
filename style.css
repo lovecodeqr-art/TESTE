@@ -453,7 +453,7 @@ body{
     text-align:justify;
 }
 
-/* JOGO DA MEMÓRIA COM CORREÇÃO DEFINITIVA DE IMAGEM */
+/* JOGO DA MEMÓRIA COM ENQUADRAMENTO INTELIGENTE CORRIGIDO */
 .memory-game-section {
     padding:60px 20px 100px 20px;
     text-align:center;
@@ -494,16 +494,14 @@ body{
     box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* Força a face da frente a receber e alinhar a tag img de forma limpa */
 .front-face {
     background:#ffffff; 
     border:2px solid #ff8fab;
     overflow:hidden;
-    padding: 0 !important; /* Remove qualquer padding de texto que herde de outras regras */
+    padding: 0 !important; 
     transform: rotateY(180deg);
 }
 
-/* Garante enquadramento total sem distorcer e sem cortar rostos */
 .front-face img {
     width: 100% !important;
     height: 100% !important;
