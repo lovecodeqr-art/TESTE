@@ -27,11 +27,12 @@ const CONFIG = {
     // Caminho das 10 Fotos do Slider Inicial (Formato iPhone)
     fotosSlider: [
         "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg"
+        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg","imag/foto10.jpg"
     ],
 
     // Caminho das 10 Fotos da Galeria em Carrossel (Fotos menores abaixo)
     fotosGaleria: [
-        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg"
+        "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg", "imag/foto9.jpg","imag/foto10.jpg"
     ],
 
     // 📸 BANCO DE FOTOS PARA O JOGO DA MEMÓRIA
