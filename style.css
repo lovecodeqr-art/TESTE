@@ -17,13 +17,64 @@ body{
     width:100%;
 }
 
-/* PLAYER DE ÁUDIO OCULTO */
+/* PLAYER DE ÁUDIO OCULTO DO YOUTUBE */
 .youtube-audio-delivery {
     position: absolute;
     width: 0;
     height: 0;
     overflow: hidden;
     pointer-events: none;
+}
+
+/* CONTÊINER GERAL DOS CORAÇÕES DINÂMICOS */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+/* ESTILIZAÇÃO INDIVIDUAL DE CADA CORAÇÃO */
+.floating-heart {
+    position: absolute;
+    color: rgba(255, 77, 109, 0.4); /* Cor rosa/vermelha romântica com transparência suave */
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+    /* Executa duas animações juntas: uma para subir/descer e outra para balançar para os lados */
+    animation: flyUp linear infinite, sway ease-in-out infinite;
+}
+
+/* Animação principal: Movimento vertical contínuo de baixo para cima */
+@keyframes flyUp {
+    0% {
+        transform: translateY(105vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* Animação secundária: Balanço suave para os lados simulando vento/flutuação */
+@keyframes sway {
+    0%, 100% {
+        margin-left: 0px;
+    }
+    50% {
+        margin-left: 35px; /* Intensidade do balanço para os lados */
+    }
 }
 
 /* PLAYER FLUTUANTE PREMIUM */
@@ -94,52 +145,6 @@ body{
     100% { transform: rotate(360deg); }
 }
 
-/* PÉTALAS E ESTRELAS */
-.floating-hearts,
-.floating-stars{
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    pointer-events:none;
-    z-index:999;
-}
-
-.floating-hearts::before{
-    content:"❤  ❤  ❤  ❤  ❤  ❤  ❤";
-    position:absolute;
-    width:100%;
-    color:rgba(255, 77, 109, 0.25);
-    font-size:24px;
-    animation: fallPetals 14s linear infinite;
-}
-
-.floating-stars::before{
-    content:"✦  ✧  ✦  ✧  ✦  ✧";
-    position:absolute;
-    width:100%;
-    color: rgba(255, 255, 255, 0.7);
-    font-size:16px;
-    animation: fallStars 18s linear infinite, twinkle 3s ease-in-out infinite;
-}
-
-@keyframes fallPetals{
-    0%{ transform: translateY(-10%) rotate(0deg); }
-    50%{ transform: translateY(50vh) rotate(180deg) translateX(20px); }
-    100%{ transform: translateY(105vh) rotate(360deg) translateX(-20px); }
-}
-
-@keyframes fallStars{
-    0%{ transform: translateY(-10%); }
-    100%{ transform: translateY(105vh); }
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-}
-
 /* TELA PRESENTE */
 #gift-screen{
     width:100%;
@@ -162,21 +167,21 @@ body{
 .gift-container p{ font-size:1.1rem; margin-bottom:40px; }
 .gift-box{ width:180px; height:180px; position:relative; cursor:pointer; transition:.4s; }
 .gift-box:hover{ transform:scale(1.1); }
-.gift-body{ width:160px; height:130px; background:#ff4d6d; position:absolute; bottom:0; left:10px; border-radius:15px; }
+.gift-body{ width:160px; height:130px; background:#ff4d6d; position:absolute; bottom:0; left:10px; border-radius:15px; box-shadow:0 15px 30px rgba(0,0,0,0.15); }
 .gift-body::before{ content:""; position:absolute; width:25px; height:100%; background:white; left:50%; transform:translateX(-50%); }
-.gift-lid{ width:180px; height:40px; background:#ff758f; position:absolute; top:20px; border-radius:15px; }
+.gift-lid{ width:180px; height:40px; background:#ff758f; position:absolute; top:20px; border-radius:15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 .gift-lid::before{ content:""; position:absolute; width:25px; height:100%; background:white; left:50%; transform:translateX(-50%); }
 
-/* MOLDURA E SLIDER DO IPHONE */
-.iphone-slider-section { width:100%; min-height:100vh; display:flex; justify-content:center; align-items:center; padding:40px 20px; }
-.iphone-mockup { width:360px; height:740px; background:#000; border:12px solid #222; border-radius:45px; position:relative; overflow:hidden; }
+/* MOLDURA E SLIDER DO IPHONE (HEADER) */
+.iphone-slider-section { width:100%; min-height:100vh; display:flex; justify-content:center; align-items:center; padding:40px 20px; background: linear-gradient(to bottom, #fff4f6, #ffe5ec); }
+.iphone-mockup { width:360px; height:740px; background:#000; border:12px solid #222; border-radius:45px; position:relative; overflow:hidden; box-shadow:0 30px 60px rgba(255, 77, 109, 0.2); }
 .iphone-notch { width:150px; height:25px; background:#222; position:absolute; top:0; left:50%; transform:translateX(-50%); border-bottom-left-radius:15px; border-bottom-right-radius:15px; z-index:10; }
 .slideshow-container{ width:100%; height:100%; position:relative; }
 .slide{ display:none; width:100%; height:100%; position:absolute; }
 .slide img{ width:100%; height:100%; object-fit:cover; filter:brightness(0.55); }
 .overlay{ width:100%; height:100%; position:absolute; background:linear-gradient(to top,rgba(0,0,0,0.85), transparent 60%); bottom:0; }
 .main-overlay{ position:absolute; bottom:40px; left:50%; transform:translateX(-50%); color:white; text-align:center; z-index:5; width:90%; }
-.love-tag{ background:rgba(255,255,255,0.2); padding:8px 20px; border-radius:50px; backdrop-filter:blur(10px); font-size:0.9rem; }
+.love-tag{ background:rgba(255,255,255,0.2); padding:8px 20px; border-radius:50px; backdrop-filter:blur(10px); font-size:0.9rem; border: 1px solid rgba(255,255,255,0.1); }
 .modern-title{ margin-top:15px; font-size:2.8rem; font-weight:300; display:flex; align-items:center; justify-content:center; gap:10px; }
 .subtitle{ margin-top:10px; font-size:1rem; opacity:0.9; }
 .heart-divider{ color:#ff4d6d; animation:pulse 1.5s infinite; }
@@ -194,15 +199,15 @@ body{
 .gallery-section { padding:60px 20px; text-align:center; width:100%; }
 .gallery-section h2 { color:#ff4d6d; margin-bottom:25px; }
 .carousel-container { position:relative; max-width:900px; margin:0 auto; display:flex; align-items:center; }
-.carousel-wrapper { overflow:hidden; width:100%; border-radius:20px; }
+.carousel-wrapper { overflow:hidden; width:100%; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.08); }
 .carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
 .carousel-item { min-width:33.333%; padding:10px; }
-.carousel-item img { width:100%; height:250px; object-fit:cover; border-radius:15px; }
-.carousel-btn { background:#ff4d6d; color:white; border:none; padding:12px; cursor:pointer; border-radius:50%; position:absolute; z-index:10; font-size:1rem; }
+.carousel-item img { width:100%; height:250px; object-fit:cover; border-radius:15px; transition:transform 0.3s; }
+.carousel-btn { background:#ff4d6d; color:white; border:none; padding:12px; cursor:pointer; border-radius:50%; position:absolute; z-index:10; font-size:1rem; box-shadow:0 4px 10px rgba(0,0,0,0.15); }
 .prev-btn { left:-15px; }
 .next-btn { right:-15px; }
 
-/* CARTA */
+/* CARTA APAIXONADA */
 .romantic-letter-section { padding:60px 20px; }
 .letter-container { max-width:700px; margin:0 auto; background:white; padding:40px 30px; border-radius:30px; box-shadow:0 15px 40px rgba(255,143,171,0.1); text-align:center; border: 1px solid #ffe5ec; }
 .letter-icon { font-size:2.5rem; margin-bottom:10px; }
@@ -221,25 +226,9 @@ body{
 .front-face img { width: 100% !important; height: 100% !important; display: block !important; object-fit: cover !important; object-position: center top !important; border-radius: 12px; }
 .back-face { background:linear-gradient(135deg,#ff8fab,#ff4d6d); color:white; font-size:1.8rem; }
 
-/* 🔍 CAÇA-PALAVRAS ROMÂNTICO (CORRIGIDO SEM ENCOSTAR NAS BORDAS) */
-.wordsearch-section {
-    padding:60px 25px; /* Margem interna global de segurança lateral */
-    text-align:center;
-    width:100%;
-}
-.wordsearch-container {
-    max-width: 750px; /* Reduzido levemente para encaixar melhor com fôlego */
-    margin: 0 auto;
-    display: flex;
-    gap: 25px;
-    background: white;
-    padding: 25px;
-    border-radius: 30px;
-    box-shadow: 0 15px 40px rgba(255,143,171,0.1);
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+/* CAÇA-PALAVRAS ROMÂNTICO */
+.wordsearch-section { padding:60px 25px; text-align:center; width:100%; }
+.wordsearch-container { max-width: 750px; margin: 0 auto; display: flex; gap: 25px; background: white; padding: 25px; border-radius: 30px; box-shadow: 0 15px 40px rgba(255,143,171,0.1); align-items: center; justify-content: center; flex-wrap: wrap; }
 .ws-word-list { flex: 1; min-width: 220px; text-align: left; background: #fff4f6; padding: 20px; border-radius: 20px; border: 1px dashed #ff8fab; }
 .ws-word-list h3 { color: #ff4d6d; font-size: 1.1rem; margin-bottom: 15px; border-bottom: 2px solid #ffc2d1; padding-bottom: 5px; }
 .ws-word-list ul { list-style: none; }
@@ -250,53 +239,15 @@ body{
 .ws-cell { width: 40px; height: 40px; background: white; color: #444; font-weight: bold; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; border-radius: 8px; cursor: pointer; }
 .ws-cell.selecting { background: #ff8fab; color: white; transform: scale(0.95); }
 .ws-cell.found { background: #ff4d6d; color: white; animation: matchPulse 0.4s ease-in-out; }
+@keyframes matchPulse { 50% { transform: scale(1.15); } }
 
-/* 🧩 JOGO 3: QUEBRA-CABEÇA SLIDER ROMÂNTICO */
-.puzzle-section {
-    padding: 60px 25px 140px 25px;
-    text-align: center;
-    width: 100%;
-}
-.puzzle-container {
-    max-width: 420px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 15px 40px rgba(255,143,171,0.1);
-    border: 1px solid #ffe5ec;
-}
-.puzzle-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr); /* Adicionado para garantir as 3 linhas */
-    gap: 4px;
-    background: #ffe5ec;
-    padding: 6px;
-    border-radius: 20px;
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Força o quadrado perfeito */
-}
-
-.puzzle-piece {
-    background-color: #fff;
-    background-size: 300% 300%; /* Ajustado para grid 3x3 */
-    border-radius: 12px;
-    cursor: pointer;
-    min-height: 80px; /* Garante altura mínima para a imagem aparecer */
-    transition: transform 0.2s ease;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 2px 6px rgba(0,0,0,0.05);
-}
-.puzzle-piece:active {
-    transform: scale(0.96);
-}
-/* Estilo do quadrado vazio */
-.puzzle-piece.empty {
-    background-image: none !important;
-    background-color: #ffe5ec !important;
-    box-shadow: none;
-    cursor: default;
-}
+/* QUEBRA-CABEÇA SLIDER */
+.puzzle-section { padding: 60px 25px 140px 25px; text-align: center; width: 100%; }
+.puzzle-container { max-width: 420px; margin: 0 auto; background: white; padding: 20px; border-radius: 30px; box-shadow: 0 15px 40px rgba(255,143,171,0.1); border: 1px solid #ffe5ec; }
+.puzzle-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; background: #ffe5ec; padding: 8px; border-radius: 20px; width: 100%; aspect-ratio: 1 / 1; min-height: 280px; }
+.puzzle-piece { background-color: #fff; border-radius: 10px; cursor: pointer; background-repeat: no-repeat; transition: all 0.2s ease; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 2px 6px rgba(0,0,0,0.05); }
+.puzzle-piece:active { transform: scale(0.96); }
+.puzzle-piece.empty { background: #ffe5ec !important; background-image: none !important; box-shadow: inset 0 0 10px rgba(255, 77, 109, 0.1); cursor: default; }
 
 .win-message { margin-top:25px; color:#ff4d6d; background: white; padding: 20px; border-radius: 20px; display: inline-block; box-shadow: 0 10px 25px rgba(255,77,109,0.1); }
 
@@ -305,13 +256,12 @@ body{
     .iphone-mockup { width:290px; height:600px; border-width:8px; }
     .modern-title { font-size:2.2rem; }
     .carousel-item { min-width:100%; }
-    .prev-btn { left:5px; }
-    .next-btn { right:5px; }
+    .prev-btn { left:5px;   }
+    .next-btn { right:5px;  }
     .memory-game { grid-template-columns:repeat(2,1fr); gap: 10px; }
     .memory-card { height:100px; }
     .floating-music-player { bottom: 15px; right: 15px; padding: 8px 15px; }
     
-    /* Proteção extrema contra bordas no Mobile */
     .wordsearch-section, .puzzle-section { padding-left: 20px; padding-right: 20px; }
     .wordsearch-container { flex-direction: column; padding: 15px; width: 100%; }
     .ws-word-list { width: 100%; }
