@@ -3,9 +3,9 @@
 // ==========================================================================
 const CONFIG = {
     // 🎵 APENAS O ID DO VÍDEO DO YOUTUBE (Exemplo: se o link é youtube.com/watch?v=TynFsTZlGDU, o ID é TynFsTZlGDU)
-    idYouTube: "rMgaguZTBqg",
+    idYouTube: "TynFsTZlGDU",
     
-    // Nome da música que vai aparecer no painel flutuante
+    // Nome da música que vai aparecer no painel flutuante após o clique
     nomeMusica: "Nossa Música Favorita 💕",
 
     // Nomes do Casal
@@ -24,13 +24,13 @@ const CONFIG = {
         <p>Este espaço é apenas um pedacinho de tudo o que eu sinto por você. Obrigado por ser minha companheira, minha melhor amiga e o amor da minha vida. Eu te amo hoje, amanhã e para sempre! 💕</p>
     `,
 
-    // Caminho das 10 Fotos do Slider Inicial (Formato iPhone)
+    // Caminho das Fotos do Slider Inicial (Formato iPhone)
     fotosSlider: [
         "imag/foto1.jpg", "imag/foto2.jpg", "imag/foto3.jpg", "imag/foto4.jpg", "imag/foto5.jpg",
         "imag/foto6.jpg", "imag/foto7.jpg", "imag/foto8.jpg"
     ],
 
-    // Caminho das 10 Fotos da Galeria em Carrossel (Fotos menores abaixo)
+    // Caminho das Fotos da Galeria em Carrossel (Fotos menores abaixo)
     fotosGaleria: [
         "imag/foto9.jpg", "imag/foto10.jpg", "imag/foto11.jpg", "imag/foto12.jpg", "imag/foto13.jpg"
     ],
@@ -50,7 +50,12 @@ const CONFIG = {
 const giftBox = document.querySelector("#giftBox");
 const giftScreen = document.querySelector("#gift-screen");
 const mainContent = document.querySelector("#main-content");
+const musicControl = document.getElementById("musicPlayerControl");
+const txtNomeMusica = document.getElementById("txtNomeMusica");
+const playerIcon = document.getElementById("playerIcon");
+
 let ytPlayer; 
+let isPlaying = false;
 
 // Inicializa o script assíncrono do YouTube
 var tag = document.createElement('script');
@@ -71,8 +76,23 @@ function onYouTubeIframeAPIReady() {
             'showinfo': 0,
             'rel': 0,
             'modestbranding': 1
+        },
+        events: {
+            'onStateChange': onPlayerStateChange
         }
     });
+}
+
+function onPlayerStateChange(event) {
+    // Se o player começar a tocar (por causa de loop ou play externo), atualiza o visual
+    if (event.data == YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        playerIcon.classList.add("playing");
+        txtNomeMusica.innerText = CONFIG.nomeMusica;
+    } else {
+        isPlaying = false;
+        playerIcon.classList.remove("playing");
+    }
 }
 
 function aplicarConfiguracoes() {
@@ -80,7 +100,6 @@ function aplicarConfiguracoes() {
     if(document.getElementById("txtNomeEla")) document.getElementById("txtNomeEla").innerText = CONFIG.nomeEla;
     if(document.getElementById("txtSubtitulo")) document.getElementById("txtSubtitulo").innerText = CONFIG.subtitulo;
     if(document.getElementById("boxTextoCarta")) document.getElementById("boxTextoCarta").innerHTML = CONFIG.textoCarta;
-    if(document.getElementById("txtNomeMusica")) document.getElementById("txtNomeMusica").innerText = CONFIG.nomeMusica;
 
     const sliderContainer = document.getElementById("sliderDinamico");
     if(sliderContainer) {
@@ -99,7 +118,6 @@ function aplicarConfiguracoes() {
     }
 }
 
-// Executa a montagem do layout básico imediatamente
 aplicarConfiguracoes();
 
 if(giftBox) {
@@ -110,12 +128,7 @@ function abrirPresente(){
     if(giftScreen) giftScreen.style.opacity = "0";
     if(mainContent) mainContent.style.display = "flex";
 
-    // Executa o player oficial
-    if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-        ytPlayer.playVideo();
-    }
-
-    const musicControl = document.getElementById("musicPlayerControl");
+    // Exibe o painel de controle flutuante com a frase de ação
     if(musicControl) {
         musicControl.classList.add("show");
     }
@@ -131,6 +144,26 @@ function abrirPresente(){
     }, 1000);
 }
 
+// CONTROLE DO BOTÃO FLUTUANTE (PLAY / PAUSE)
+if(musicControl) {
+    musicControl.addEventListener("click", function() {
+        if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
+
+        if (!isPlaying) {
+            ytPlayer.playVideo();
+            isPlaying = true;
+            playerIcon.classList.add("playing");
+            txtNomeMusica.innerText = CONFIG.nomeMusica;
+        } else {
+            ytPlayer.pauseVideo();
+            isPlaying = false;
+            playerIcon.classList.remove("playing");
+            txtNomeMusica.innerText = "Clique para ouvir 🎵";
+        }
+    });
+}
+
+// SLIDESHOW INTERNO DO IPHONE
 let slideIndex = 0;
 let slideshowTimeout;
 
